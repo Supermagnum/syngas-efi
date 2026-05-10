@@ -128,7 +128,7 @@ Separate VE tables are built for each fuel mode. Megasquirt handles this nativel
 
 | Sensor | Purpose | Notes |
 |---|---|---|
-| TPS | Load input, map switching trigger | Standard |
+| TPS | Load input,  | Standard |
 | MAP | Speed-density fueling, boost monitoring | 0–300 kPa range for turbo |
 | IAT | Charge temp correction | Mount post-intercooler |
 | CLT | Cold start lockout for syngas mode | Syngas only above 80°C |
@@ -139,6 +139,8 @@ Separate VE tables are built for each fuel mode. Megasquirt handles this nativel
 | Oil dilution sensor | Tar/fuel contamination in oil | Refractive index or conductivity |
 | Barometric pressure | Altitude compensation | Often internal to MAP sensor |
 | Ambient humidity | Charge density correction | BME280 combined sensor |
+
+### Dpdt switch for fuel map switching
 
 ### Gasifier System Sensors
 
