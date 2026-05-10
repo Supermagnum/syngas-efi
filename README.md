@@ -128,7 +128,7 @@ Separate VE tables are built for each fuel mode. Megasquirt handles this nativel
 
 | Sensor | Purpose | Notes |
 |---|---|---|
-| TPS | Load input,  | Standard |
+| TPS | Load input, map switching trigger | Standard |
 | MAP | Speed-density fueling, boost monitoring | 0–300 kPa range for turbo |
 | IAT | Charge temp correction | Mount post-intercooler |
 | CLT | Cold start lockout for syngas mode | Syngas only above 80°C |
@@ -139,8 +139,6 @@ Separate VE tables are built for each fuel mode. Megasquirt handles this nativel
 | Oil dilution sensor | Tar/fuel contamination in oil | Refractive index or conductivity |
 | Barometric pressure | Altitude compensation | Often internal to MAP sensor |
 | Ambient humidity | Charge density correction | BME280 combined sensor |
-
-### Dpdt switch for fuel map switching
 
 ### Gasifier System Sensors
 
@@ -1634,3 +1632,291 @@ Wet material:
 - Filter elements are cleanable with gasoline soak and ultrasonic bath — stainless and ceramic both have indefinite service life if handled correctly
 - Oil change intervals must be shortened significantly on wood gas operation — monitor via oil dilution sensor and catch tank fill rate trend
 - CO from wood gas is odorless and lethal — a dedicated electrochemical CO detector with automatic shutoff valve is mandatory for any vehicle or enclosed installation
+
+---
+
+## 18. Commercial Systems, DIY Plans and Salvage Materials
+
+Target: 1.2–4 litre engine displacement. 316 stainless steel minimum grade throughout — tar acids, condensate and thermal cycling destroy mild steel rapidly. DIY builds in stainless are entirely viable using salvaged and surplus materials.
+
+---
+
+### DIY Plans — Free and Paid
+
+**Drive On Wood — Free Plans Library**
+The most important free resource. FEMA stratified downdraft plans, Imbert dimensions, Larry Dobson public domain design, Gary Gilmore charcoal gasifier, and overview schematics. Wayne Keith's vehicle gasifier plans available to premium members — the most proven vehicle design in operation.
+- Free plans: https://www.driveonwood.com/library/free-gasifier-plans/
+- Full library (research papers, FAO documents, GENGAS): https://www.driveonwood.com/library/
+
+**FEMA Simplified Wood Gas Generator — Free PDF**
+Original 1989 FEMA emergency gasifier document. Stratified downdraft design. Free download — historical reference and starting point. Note: known tar producer at variable loads — suitable as educational base, upgrade design before engine use.
+- https://archive.org/details/femasimplifiedwoodgasgeneratormar1989withbiomassenergyfoundation2001
+
+**Build-A-Gasifier — Free Plans and Downloads**
+Collection of free gasifier plans including FEMA design, Imbert dimensions, downdraft design guidelines based on Swedish WW2 experience, and multiple research PDFs. Good starting library.
+- Plans: https://www.build-a-gasifier.com/gasifier-plans/
+- FEMA specific: https://www.build-a-gasifier.com/fema-gasifier-plans/
+
+**Ben Peterson — Wood Gasifier Builder's Bible (Paid)**
+Most popular paid DIY plan set. 238 pages, sizing charts, critical dimensions, engine conversion guide. Stainless steel build in plans. Self-build cost estimate: $2,800–$3,500 using CNC parts in mild steel, $12,500–$15,000 in stainless turn-key. Plans available for download.
+- https://www.woodgasifierplans.com/
+- Resources and overview: http://www.woodgasifierplans.com/resources/
+
+**GEK Gasifier Wiki — All Power Labs Open Source (Original)**
+Original open-source GEK design files, CAD drawings and documentation before All Power Labs went proprietary. Still freely available. Good engineering reference for reactor geometry.
+- https://wiki.gekgasifier.com/
+
+**FAO — Wood Gas as Engine Fuel (Free PDF)**
+United Nations Food and Agriculture Organisation document. Comprehensive technical overview of wood gasification for engine use. Free download. Essential reading.
+- https://www.driveonwood.com/library/
+
+**Handbook of Biomass Downdraft Gasifier Engine Systems — SERI/US DOE (Free PDF)**
+US Department of Energy handbook. Design, testing, operation and manufacture of small-scale gasifiers under 200 kW. Free download via Drive On Wood library and Build-A-Gasifier.
+- https://www.build-a-gasifier.com/gasifier-plans/
+
+---
+
+### Salvage and Surplus Materials for Stainless DIY Build
+
+A 316 stainless gasifier can be built largely or entirely from salvaged components. The following sources provide suitable material at low or zero cost.
+
+#### Dairy and Food Industry — Best Source
+
+```
+Dairy industry stainless is almost always 316L — the same
+grade required for food contact with acidic products.
+Exactly correct for gasifier construction.
+
+WHAT TO LOOK FOR:
+
+Milk tanks and vats
+  Large cylindrical vessels — ideal gasifier body
+  Heavy wall thickness — 3–6mm typical
+  316L as standard — food grade requirement
+  Dished or conical ends — ready-made hopper shapes
+  Tri-clamp fittings already fitted — ideal for clean-out ports
+  Insulated outer jacket on some — bonus thermal benefit
+
+Dairy pipework and fittings
+  1.5" to 4" diameter — gas piping, nozzle manifolds
+  Tri-clamp couplings — perfect for inspection and clean-out access
+  Elbows, tees, reducers — all 316L as standard
+  Gaskets — replace with Viton for tar resistance
+
+Cheese vats and processing vessels
+  Large flat-bottomed cylindrical tanks
+  Heavy gauge 316L
+  Often have agitator shaft penetrations already —
+    useful as stirrer/agitator shaft entry points
+
+Pasteuriser plates and heat exchangers
+  Plate heat exchangers — excellent gas cooler conversion
+  Already designed for liquid/gas thermal exchange
+  316L plates, high surface area, compact
+  Tri-clamp connections standard
+
+Butter churns and cream separators
+  Smaller cylindrical vessels
+  Useful for filter housings, secondary cyclone bodies
+
+Milk pipeline inline filters
+  Some already have filter basket housings in 316L
+  Size may suit final filter housing directly
+
+Where to find:
+  Farm equipment dealers — used dairy equipment
+  Farm auctions — decommissioned dairy farms
+  Dairy equipment recyclers
+  Online farm machinery classifieds (Finn.no, Blocket.se)
+  Local dairy farms upgrading equipment
+  Slaughterhouse equipment suppliers
+```
+
+#### Water Heater Inner Tanks
+
+```
+IMPORTANT: Stainless inner tanks only — not enamel lined.
+
+Stainless inner tank water heaters:
+  Typically 1.5–3mm 304 or 316 stainless
+  Cylindrical — ideal reactor body form
+  Already pressure rated — robust construction
+  Typically 100–300 litre capacity
+  Domed ends — structurally excellent
+
+How to identify stainless inner tank:
+  Look for "stainless steel tank" or "rustfri" marking
+  Magnet test — 304/316 is weakly magnetic or non-magnetic
+  Cut-open scrapped units — visible at scrap dealers
+
+Note on grade:
+  304 stainless in water heaters is common
+  Suitable for outer body and hopper sections
+  Upgrade to 316L for reactor throat, nozzle ring,
+  and reduction zone — highest tar acid exposure
+
+Where to find:
+  Plumbing and heating suppliers — damaged/returned units
+  Scrap metal dealers — often whole units available
+  Heating contractor waste — old boiler rooms
+  Building demolition — old plant rooms
+```
+
+#### Food Processing Industry
+
+```
+Brewing and beverage industry:
+  Fermentation vessels — large 316L cylinders
+  Bright tanks — pressure rated, heavy gauge
+  CIP (clean-in-place) pipework — 316L throughout
+  Keg bodies — small pressure vessels, heavy wall
+
+Bakery and food processing:
+  Mixing bowl liners — 316L, various sizes
+  Conveyor trays and hoppers — flat 316L sheet
+  Food grade piping — various diameters
+
+Fish processing industry (relevant in Norway):
+  316L is mandatory for fish contact
+  Fish tanks, processing tables, pipework
+  All 316L — chloride resistance required for
+  salt fish environment — same grade needed for gasifier
+
+Pharmaceutical/chemical industry surplus:
+  Highest grade stainless — 316L or 316Ti standard
+  Reactors, vessels, pipework — all suitable
+  Often very heavy gauge — overkill but excellent
+
+Where to find in Norway:
+  Nofima (food research) surplus sales
+  Fish processing plant equipment recyclers
+  Brewery equipment dealers
+  Industriloppis / industrial surplus auctions
+  Finn.no — søk "rustfri tank", "syrefast", "316 stål"
+```
+
+#### Restaurant and Catering Equipment
+
+```
+Commercial kitchen equipment:
+  Worktops and sinks — 316L sheet material
+  Stockpots — heavy gauge 316L, various sizes
+  Gastronorm containers — flat sheet, pressings
+  Exhaust hoods — large flat 316L sheet
+
+Useful for:
+  Flat plate fabrication
+  End caps and covers
+  Filter housing components
+  Heat shield panels
+```
+
+#### Scrap and Surplus Metal Dealers
+
+```
+Specify when sourcing:
+  "Syrefast stål" (Norwegian/Swedish for acid-resistant steel)
+  "316L rustfri" — standard specification term
+  "AISI 316L" or "EN 1.4404" — European standard designation
+
+Test for stainless at scrap yard:
+  Magnet — 316L is non-magnetic or very weakly magnetic
+  Angle grinder spark test — stainless gives short, dull sparks
+    vs mild steel which gives long bright star-burst sparks
+  Ask for material certificate if available — MTR document
+
+Avoid:
+  409 stainless — ferritic, magnetic, poor corrosion resistance
+  430 stainless — decorative grade, insufficient for gasifier
+  Galvanised steel — zinc vapour is toxic in gasifier
+  Mild steel — will corrode rapidly in tar acid environment
+```
+
+#### Key Components and Suitable Salvage Sources
+
+| Component | Material Needed | Best Salvage Source |
+|---|---|---|
+| Reactor body | 316L cylinder | Dairy vat, water heater tank, fermentation vessel |
+| Hopper | 304 or 316L | Dairy cone bottom tank, water heater top |
+| Nozzle ring | 316L tube/plate | Dairy pipework, food grade tube |
+| Reduction zone throat | 316L heavy plate | Dairy vessel offcuts, plate heat exchanger |
+| Gas outlet pipe | 316L tube | Dairy CIP pipework, brewery pipework |
+| Cyclone body | 316L sheet | Dairy vat offcuts, food processing sheet |
+| Filter housing | 316L cylinder | Dairy inline filter, small milk vessel |
+| Gas cooler | 316L plate HX | Dairy plate heat exchanger — ideal direct use |
+| Piping | 316L tube | Dairy/brewery CIP pipe, fish plant pipework |
+| Fittings | 316L tri-clamp | Dairy fittings — standard and abundant |
+| Fasteners | A4-70 stainless | Marine hardware suppliers |
+
+---
+
+### Commercial Kits and Systems — Suppliers
+
+**ThriveOffGrid (formerly Vulcan Gasifier)**
+Longest-running small engine gasifier manufacturer in the US. CXF charcoal cross-fire and DFX dual fuel series cover 1.2–4L engine range. 2025/2026 models include stainless steel hopper lid, water tank and side brackets.
+- https://www.thriveoffgrid.net/
+- https://www.thriveoffgrid.net/cxfcrossfiregasifier
+
+**All Power Labs — GEK Gasifier Kit**
+University and OEM grade system. Complete gas-making system from fuel feed through filter with full automation, wideband O₂ sensor, auger feed, cyclone and filter. Ships assembled and commissioned. Engineered to a high standard — not a hobby kit.
+- https://www.allpowerlabs.com/products/gasifier-kits
+
+**Clinch Energy Solutions**
+Turn-key charcoal gasifier kit. Five-component assembly, rated to 5.7L engine / 25 kW generator. Targets 10–15 minute startup. Straightforward small engine integration.
+- https://www.clinchenergysolutions.com/gasifiers
+
+**OffGrid48 — Ben Peterson Design**
+DIY build kits with laser-cut parts available in mild steel or stainless steel, 1/8" and 1/4" thickness. Complete kit includes all structural components, hardware, insulation, motors and electronics. Best stainless DIY kit option in the US market.
+- http://www.offgrid48.com/diy-wood-gasifier-kits.html
+
+**WoodGasifierPlans — Plans and Used Units**
+Plans for self-build plus occasional used units for sale. Some used units in 304/316 stainless construction. Good resource for downdraft design documentation.
+- https://www.woodgasifierplans.com/pages/gasifiers-for-sale
+
+**Drive On Wood — Wayne Keith Community**
+Not a supplier but the most important vehicle gasifier resource online. Free plans, build documentation, forums, vehicle conversion experience. Essential reference before any purchase or build decision.
+- https://www.driveonwood.com/
+
+---
+
+### European
+
+**Spanner Re² GmbH — Germany**
+Leading European wood chip CHP gasifier manufacturer. Over 1,100 installations worldwide. ISO 9001 certified. Wood chips or pellets. HKA series 35–300+ kW electric. Stainless and high-grade steel construction throughout. Refurbished units also available.
+- Main site: https://re2.energy/en/
+- Biomass power plants overview: https://re2.energy/en/biomass-power-plants/overview-biomass-power-plant
+- Refurbished systems: https://re2.energy/en/services/refurbished-systems
+
+**Volter — Finland**
+Finnish manufacturer — Scandinavian climate design, well suited to Norwegian conditions and feedstocks. Walter CHP unit: 40 kW electric / 100 kW heat from wood chips or pellets. Indoor and outdoor (shipping container) versions. High automation, remote monitoring capable. Most relevant European supplier for Norwegian installation.
+- https://volter.fi/en/volter-products/
+- Technology overview: https://volter.fi/en/volter-products/technology/
+
+**Fröling — Austria**
+Austrian boiler and gasification manufacturer. Pioneer in wood gasification technology. Partners with MAN Engines for CHP applications. High build quality, well established in European agricultural and industrial market.
+- https://www.froeling.com/en/
+
+**Burkhardt — Germany**
+Wood pellet gasifier CHP units. Pellet feedstock suits Norwegian supply chain well. Well proven in European farm and light industrial installations.
+- https://www.burkhardt.de/en/
+
+---
+
+### Note on 316 Stainless Specification
+
+Most commercial CHP units (Spanner, Volter, Burkhardt) use high-grade stainless and alloy steel in critical hot zones as standard — these are engineered systems, not kits. For kit and self-build suppliers, specifically request 316L stainless for:
+
+```
+Reactor inner wall and throat
+Reduction zone components
+Gas outlet piping
+Filter housing and internals
+All fasteners in hot zones
+
+316L preferred over 304:
+  Superior resistance to tar acids
+  Better chloride corrosion resistance
+  Suitable for sustained high-temperature cycling
+```
+
+Contact suppliers directly to confirm material specifications before ordering — stainless grade is not always stated in general product descriptions.
