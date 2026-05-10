@@ -128,7 +128,7 @@ Separate VE tables are built for each fuel mode. Megasquirt handles this nativel
 
 | Sensor | Purpose | Notes |
 |---|---|---|
-| TPS | Load input, map switching trigger | Standard |
+| TPS | Load input, | Standard |
 | MAP | Speed-density fueling, boost monitoring | 0–300 kPa range for turbo |
 | IAT | Charge temp correction | Mount post-intercooler |
 | CLT | Cold start lockout for syngas mode | Syngas only above 80°C |
