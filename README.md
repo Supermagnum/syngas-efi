@@ -1072,7 +1072,533 @@ Element service life:
 
 ---
 
-## 14. EGT Operating Ranges
+## 14. Alternative Feedstocks — Locally Available Materials
+
+All feedstocks below are readily available in Norwegian and Scandinavian conditions. Used alone or blended with Alnus incana as the quality anchor.
+
+---
+
+### Wood Industry Waste
+
+#### Sawdust and Wood Shavings
+```
+Source:         Sawmills, carpentry shops — often free in quantity
+Compression:    Excellent — best compression ratio of all materials
+                Log splitter produces very dense stable briquette
+Moisture:       Fresh sawdust 30–50% — press then air dry
+                Target below 15% before use
+Ash content:    0.3–1% (clean hardwood species)
+Tar yield:      Low–moderate — hardwood preferred over softwood
+
+AVOID:
+  MDF, chipboard, plywood sawdust
+  → Formaldehyde and urea-formaldehyde resins
+  → Toxic gasification byproducts
+  Pine/spruce sawdust — higher resin content, more tar
+  Hardwood sawdust strongly preferred
+```
+
+#### Wood Pellets (EN Plus Standard)
+```
+Source:         Hardware stores, fuel suppliers — widely available
+Compression:    Already compressed — use directly
+Ash content:    0.3–0.7% (EN Plus A1 certified)
+Moisture:       Below 10% — controlled and consistent
+Tar yield:      Low
+Size:           6–8mm diameter — excellent hopper flow
+
+Notable:        Most consistent feedstock available commercially
+                Certified quality — predictable and stable gas output
+                Eliminates feedstock variability entirely
+                Excellent reference fuel for initial ECU tuning
+                and establishing baseline VE tables
+                Cost higher than waste materials but
+                quality advantage significant for tuning work
+```
+
+#### Wood Pellet Industry Debris and Fines
+```
+Source:         Pellet mills — fines and broken pellets
+                screened out as waste product before packaging
+                Often free or very low cost directly from mill
+Compression:    Press fines into briquettes with log splitter
+                Fines alone do not feed well — must be compressed
+Ash content:    Same as parent pellets — 0.3–0.7%
+Moisture:       Low — same drying process as pellets
+Tar yield:      Low
+
+Notable:        Essentially the same quality as commercial pellets
+                at waste stream price
+                Ideal — quality of EN Plus at zero or minimal cost
+                May need simple screening to remove bark fines
+                Contact local pellet mills directly
+                Large mills produce significant debris volumes
+```
+
+#### Bark
+```
+Source:         Sawmill debarking waste
+Compression:    Good
+Ash content:    2–5% — higher than clean wood
+Tar yield:      Moderate–high — more extractives than wood
+Notable:        Better blended than used alone (max 20%)
+                Alder bark lower tar than conifer bark
+                Conifer bark particularly resinous — use sparingly
+```
+
+---
+
+### Paper and Cardboard
+
+#### Newspaper
+```
+Source:         Households, printers, distribution centres
+Compression:    Excellent — very high density achievable
+Ash content:    2–4%
+Tar yield:      Low
+Moisture:       Usually already dry
+
+Notable:        Modern newspaper ink is soy or water based
+                Minimal chlorine concern with current printing
+                Older stock may have higher ink loading
+                One of the easiest and most available feedstocks
+                Compress tightly — expands if not well pressed
+```
+
+#### Cardboard and Corrugated Packaging
+```
+Source:         Supermarkets, retail, warehouses — very abundant
+Compression:    Excellent — corrugated compresses to high density
+Ash content:    2–5% (clay fillers, coatings variable)
+Tar yield:      Low
+Notable:        Wax coated boxes acceptable — wax burns cleanly
+                Check for foil laminate or plastic windows — remove
+                Brown kraft cardboard is the best grade
+                Egg cartons — uncoated, excellent feedstock
+```
+
+---
+
+### Agricultural Waste
+
+#### Barley and Oat Straw
+```
+Source:         Farms after harvest — very abundant, often free
+Compression:    Excellent — compresses to stable dense briquette
+                Log splitter handles easily
+Moisture:       Field baled 15–25%, barn stored better
+                Press squeezes out significant free moisture
+Ash content:    4–6%
+Tar yield:      Low–moderate
+Silica content: Moderate — lower than wheat straw
+
+Notable:        Barley and oat straw preferred over wheat straw
+                  → Lower silica content
+                  → Less abrasive ash on grate and agitator
+                  → Less glassy clinker formation
+                Blend with wood material recommended — max 30–40%
+                Straw alone produces high ash volume
+                Monitor agitation frequency — increases with straw content
+```
+
+#### Wheat Straw
+```
+Source:         Farms — extremely abundant
+Compression:    Excellent
+Ash content:    5–8%
+Tar yield:      Low–moderate
+Silica:         High — highest of the common straws
+
+Notable:        Higher silica than barley/oat straw
+                  → More abrasive ash
+                  → Glassy clinker at oxidation zone temperatures
+                  → Increases grate and agitator wear
+                Use as blend component only — max 20%
+                Barley or oat straw preferred if choice available
+```
+
+#### Hay
+```
+Source:         Farms — surplus or spoiled bales
+Compression:    Excellent
+Ash content:    5–9% — variable with grass species
+Tar yield:      Low–moderate
+Moisture:       Variable — barn stored dry hay preferred
+                Spoiled wet hay needs pressing and long drying
+
+Notable:        More variable composition than straw
+                Mixed grass species = variable gas quality
+                Acceptable blend component — max 20–25%
+                Good use for spoiled hay unsuitable for animal feed
+```
+
+---
+
+### Forest Industry Waste
+
+#### Conifer Cones (Pine, Spruce)
+```
+Source:         Forest floor, forestry operations, sawmill yards
+                Extremely abundant in Norwegian conditions
+Compression:    Moderate — hollow structure, less compressible
+                than paper but log splitter handles well
+Moisture:       Fresh 30–50% — must be dried
+                6–12 weeks open air drying minimum after pressing
+                Pressing expels significant free moisture
+Ash content:    1–3%
+Tar yield:      Moderate–high — resin pockets in scales
+
+Notable:        Resin content is the main concern
+                → Higher filter loading than wood
+                → Monitor differential pressure — rises faster
+                → Increase filter cleaning frequency accordingly
+                Best used as blend with alder — max 20–30%
+                Dry thoroughly — wet cones produce very poor gas
+                and severely increase tar loading
+```
+
+#### Wood Chips
+```
+Source:         Tree surgeons, municipal green waste contractors
+                Forest harvesting operations — often free
+Compression:    Good when pre-dried and chipped uniformly
+Moisture:       Fresh chips 40–55% — significant drying needed
+                6–12 months open air drying recommended
+                Pressing helps but moisture is deep in chip
+
+Notable:        Size inconsistency can cause hopper bridging
+                Chip through log splitter form to standardise size
+                Mixed species chips — quality varies
+                Request hardwood chips where possible
+```
+
+---
+
+### Charcoal
+
+Fundamentally different from other feedstocks — pyrolysis already complete, near-zero tar output.
+
+```
+Source:         Commercial charcoal, self-produced from gasifier char,
+                charcoal production operations
+
+Properties:
+  Ash content:    1–5% (depends on source wood)
+  Tar yield:      Near zero — pyrolysis already done
+  Moisture:       3–8% — store dry, hygroscopic
+  Carbon content: 75–95%
+  Warmup time:    5–8 minutes (shorter than wood)
+
+Gas composition vs wood gas:
+  CO higher:   28–35% vs 18–25%
+  H₂ lower:    5–10%  vs 10–16%
+  Tar:         Near zero vs significant
+
+Advantages:
+  Near-zero tar → filter stays clean far longer
+  Very clean engine operation
+  Reduced oil contamination
+  Consistent gas quality
+  Shorter warmup time
+
+Disadvantages:
+  Lower bulk density — larger hopper volume needed
+  Fragile — crushes to fines, store and handle carefully
+  Fines block gasifier bed — agitation critical
+  Hygroscopic — sealed dry storage essential
+  Cost higher than raw wood unless self-produced
+
+Self-produced charcoal:
+  Gasifier produces char as byproduct
+  Collect from ash system
+  Process in simple retort kiln
+  Feed back as fuel — zero waste loop
+  Alnus incana char → low ash charcoal → very clean gas
+```
+
+---
+
+### Blending Strategy for Norwegian Conditions
+
+```
+PRIMARY FUEL (quality anchor):
+  Alnus incana wood cubes          40–50%
+
+WOOD INDUSTRY (free or low cost):
+  Sawdust/shavings briquettes      15–20%
+  Wood pellet debris/fines         10–15%
+    (contact local pellet mill)
+
+AGRICULTURAL (seasonal availability):
+  Barley or oat straw briquettes   10–15%
+  Hay briquettes (dry surplus)     0–10%
+
+FOREST WASTE:
+  Conifer cone briquettes          10–15%
+    (well dried — below 15% moisture)
+
+PAPER/CARDBOARD:
+  Newspaper + cardboard blend      10–15%
+
+CHARCOAL (periodic):
+  Pure charcoal run every 50–100 hours
+  Cleans gasifier internals and engine simultaneously
+
+WOOD PELLETS:
+  Keep a supply for:
+    Initial ECU tuning reference
+    Quality baseline verification
+    Backup when other stocks low
+```
+
+---
+
+### Feedstock Quick Reference
+
+| Material | Source | Cost | Compress | Ash | Tar | Max Blend % |
+|---|---|---|---|---|---|---|
+| Alnus incana | Woodlot / supplier | Low | Optional | Very low | Very low | Primary — 100% capable |
+| Wood pellets | Fuel supplier | Low | No | Very low | Low | 100% — reference fuel |
+| Pellet mill debris | Pellet mill | Free | Yes — fines | Very low | Low | 100% if clean |
+| Sawdust (hardwood) | Sawmill | Free | Yes | Low | Low | 100% if clean species |
+| Cardboard / newspaper | Retail / households | Free | Yes | Low–med | Low | 20–30% |
+| Barley / oat straw | Farms | Free | Yes | Medium | Low–mod | 30–40% |
+| Wheat straw | Farms | Free | Yes | Med–high | Low–mod | 20% |
+| Hay | Farms | Free | Yes | Med–high | Low–mod | 20–25% |
+| Conifer cones | Forest | Free | Yes | Low–med | Mod–high | 20–30% |
+| Wood chips (hardwood) | Tree surgeons | Free | Optional | Low | Low–mod | 50% if dried |
+| Charcoal | Various / self-made | Low–med | No | Low | Near zero | 100% capable |
+
+---
+
+### Golden Rules for Any Feedstock
+
+```
+1. Moisture below 15% before use — press then dry
+2. No chlorine — no PVC, foil laminates, glossy coatings
+3. No synthetic polymers — no polyester, nylon, acrylic
+4. No treated materials — no painted, preservative treated wood
+5. No MDF, chipboard, plywood — resin binders are toxic
+6. Test unfamiliar materials with small open fire first
+     Clean flame = proceed
+     Black smoke / acrid smell = reject
+7. Monitor filter ΔP rate of rise — fastest indicator
+   of feedstock quality impact on the system
+```
+
+---
+
+## 15. Fuel Briquette Production — Converted Hydraulic Log Splitter
+
+A standard hydraulic log splitter converted with a compression end plate is a practical and effective briquette press requiring minimal investment.
+
+### Why a Log Splitter Works Well
+
+```
+Typical log splitter force:    10–30 tonnes
+Compression ratio achieved:    6:1 to 10:1 depending on material
+Density achieved:              500–900 kg/m³
+Moisture expulsion:            Significant — free moisture
+                               literally squeezed out under pressure
+Availability:                  Widely available new or secondhand
+Existing hydraulics:           No modification to hydraulic system
+                               Only the working end is changed
+Production rate:               4–8 briquettes per minute realistic
+```
+
+### Conversion — Compression End Plate
+
+Replace the splitting wedge with a flat compression plate and add a forming box:
+
+```
+REMOVE:
+  Splitting wedge — unbolt or cut off
+
+FABRICATE AND FIT:
+
+  1. COMPRESSION PLATE
+     Material:    20–25mm steel plate
+     Size:        Match forming box opening exactly
+     Edges:       Chamfered slightly — aids ejection
+     Attach:      Weld or bolt to ram end in place of wedge
+     Drainage:    3–5mm holes drilled through plate
+                  Allows moisture to escape during compression
+
+  2. FORMING BOX (fixed to splitter table)
+     Material:    5–8mm steel plate, welded construction
+     Internal:    100×100mm or 150×150mm square cross section
+                  200–250mm depth
+     Open top:    Loading — fill from above
+     Open bottom: Ejection — briquette pushed through and out
+     Drainage:    Slots or holes in sides and base
+                  Moisture exits during pressing
+     Attachment:  Bolt to existing splitter table
+                  Removable for maintenance
+
+  3. OPTIONAL STOP PLATE
+     Thin steel plate placed under forming box
+     Catches briquette on ejection
+     Slide out to collect finished briquette
+```
+
+### Forming Box Dimensions
+
+```
+100×100mm internal:
+  Produces small dense briquettes
+  Good for small gasifiers
+  Higher production rate per cycle
+
+150×150mm internal:
+  Larger briquette — better for larger gasifiers
+  Fewer cycles needed for same fuel volume
+  Better for coarse materials like straw and cones
+
+200mm depth recommended for both:
+  Sufficient compression travel
+  Good briquette length for hopper feed
+```
+
+### Compression Plate Detail
+
+```
+        RAM →  [=======PLATE=======]
+                  ○  ○  ○  ○  ○      ← drainage holes
+               ___________________
+              |                   |   ← forming box walls
+              |   MATERIAL        |
+              |   being           |
+              |   compressed      |
+              |___________________|
+                        ↓
+                  [briquette exits]
+                  moisture drains
+```
+
+### Material Preparation
+
+```
+NEWSPAPER / CARDBOARD:
+  Tear or shred to roughly 100mm pieces
+  Soak in water 30–60 minutes
+    (wet paper compresses better and binds on drying)
+  Squeeze out bulk water by hand first
+  Load forming box — compress fully
+  Hold pressure 10–20 seconds
+  Eject — stack on drying rack
+
+SAWDUST / WOOD SHAVINGS:
+  No soaking needed if moisture above 20%
+  If dry — add small amount of water to aid binding
+  Fill box loosely — material compacts significantly
+  Compress fully — hold 15–30 seconds
+  Eject carefully — dry sawdust briquettes fragile until dried
+
+STRAW / HAY:
+  Cut or shred to 50–100mm lengths
+  No soaking needed — press dry or slightly damp
+  Load loosely — compresses dramatically
+  Compress fully — hold 20–30 seconds
+  Eject — straw briquettes hold shape well
+
+CONIFER CONES:
+  Partially dry first — 4–6 weeks minimum
+  Mix with 20–30% shredded newspaper for binding
+  Pure cones compress less uniformly
+  Mixed cone/paper briquette much more stable
+
+MILK CARTONS / CARDBOARD PACKAGING:
+  Flatten and tear to pieces
+  Mix with newspaper for better binding
+  Compress — PE content in cartons aids cohesion on drying
+```
+
+### Binding — Natural Options
+
+```
+No chemical binders needed for most materials.
+Natural binding occurs through:
+
+  Paper/cardboard:   Cellulose fibres interlock under pressure
+                     Hydrogen bonding on drying — very strong
+
+  Sawdust:           Lignin softens slightly under compression heat
+                     Binds on cooling and drying
+
+  Straw:             Silica surface aids mechanical interlocking
+
+  PE in cartons:     Slight plasticity aids cohesion
+
+For difficult materials (pure cones, coarse bark):
+  Add 20–30% newspaper or cardboard as binder matrix
+  Starch paste (potato or wheat starch) — 5–10% addition
+    → Traditional briquette binder
+    → Fully organic — no gasification concerns
+    → Mix with water to thin paste, coat material before pressing
+```
+
+### Drying After Pressing
+
+```
+Stack briquettes with gaps between for airflow:
+
+  Newspaper/cardboard:   1–3 weeks air drying
+  Sawdust:               2–4 weeks
+  Straw/hay:             1–2 weeks (dries faster than wood)
+  Conifer cone mix:      3–6 weeks
+  Mixed materials:       2–4 weeks
+
+Target moisture below 15% before gasifier use.
+
+Accelerate drying:
+  Stack near gasifier exhaust heat (not contact)
+  Solar drying rack — covered but ventilated
+  Barn storage with airflow — ideal
+
+Check with wood moisture meter before loading hopper.
+Rising filter ΔP in operation = feedstock too wet.
+```
+
+### Production Capacity Estimate
+
+```
+One operator, standard 8-tonne log splitter:
+
+  Newspaper briquettes:     60–80 per hour
+  Cardboard briquettes:     50–70 per hour
+  Straw briquettes:         40–60 per hour
+  Sawdust briquettes:       50–70 per hour
+  Mixed briquettes:         50–70 per hour
+
+Energy equivalent per hour production:
+  ~20–40 kWh thermal fuel value
+  Sufficient for several hours of engine operation
+  depending on load and engine size
+
+Batch production — press one session per week
+adequate for continuous operation of most installations.
+```
+
+### Safety During Pressing
+
+```
+Hydraulic log splitters are powerful:
+  Never place hands in forming box during operation
+  Keep forming box securely bolted to table
+  Inspect welds on forming box regularly
+  Ensure drainage holes clear — blocked holes
+    → hydraulic pressure buildup in water
+    → sudden ejection risk
+
+Wet material:
+  Moisture spray during compression is normal
+  Stand clear of ejection direction
+  Wear eye protection
+```
+
+---
+
+## 16. EGT Operating Ranges
 
 | EGT Range | Condition | Action |
 |---|---|---|
@@ -1083,10 +1609,17 @@ Element service life:
 
 ---
 
-## 15. Notes and Operational Summary
+## 17. Notes and Operational Summary
 
 - Wood gas is a viable engine fuel with effective RON 100–120, making it genuinely turbo-compatible without knock risk at moderate boost pressures
-- Alnus incana (grey alder) is an excellent feedstock choice — low ash reduces agitation frequency and clinker formation, low tar reduces engine fouling risk and filter cleaning intervals
+- Alnus incana (grey alder) is the benchmark feedstock — low ash, low tar, consistent gas quality; use as the quality anchor in any blend
+- Locally abundant feedstocks in Norwegian conditions: sawdust and wood shavings, wood pellets and pellet mill debris, newspaper, cardboard, barley/oat straw, hay, conifer cones, wood chips, and charcoal — all viable alone or blended
+- Barley and oat straw preferred over wheat straw — lower silica content, less abrasive ash and clinker formation
+- Wood pellets (EN Plus) are the ideal reference fuel for initial ECU tuning — consistent and certified quality eliminates feedstock variables during setup
+- Pellet mill debris and fines are essentially free EN Plus quality fuel — contact local mills directly
+- Charcoal produces near-zero tar, shorter warmup (5–8 min), and very clean engine operation — periodic charcoal-only runs clean gasifier and engine internals
+- A hydraulic log splitter converted with a flat compression plate and forming box is an effective briquette press — no modification to hydraulics, only the working end changes
+- Compression simultaneously increases density and expels free moisture — press then air dry to below 15% before use
 - Gasoline/syngas blending and flexfuel (ethanol blend)/syngas combinations are viable — ethanol's high octane complements wood gas well
 - The system requires active agitation on smooth roads and stationary installations — a timer-controlled 12V chain-driven worm gear motor is the practical solution
 - Two-tier control separates engine-critical decisions (ECU) from system-level safety and gasifier management (supervisor)
