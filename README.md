@@ -1,6 +1,3 @@
-# syngas-efi
-A writeup for a gasoline/syngas efi system
-
 # Wood Gas / Syngas EFI Dual Fuel System
 ### Complete Design and Engineering Reference
 
@@ -612,7 +609,470 @@ SUPERVISOR OUTPUTS:
 
 ---
 
-## 11. EGT Operating Ranges
+## 11. Gasifier Warmup and Fuel Switch Procedure
+
+### Warmup Time
+
+A gasifier requires 10–15 minutes from cold start to establish stable thermal zones and produce engine-quality gas. During this period gas quality is poor — high in tar vapor, low in CO and H₂ — and must not be directed to the engine.
+
+### The Classic Method (WW2)
+
+The original operator procedure was elegant and reliable:
+
+```
+1. Start gasifier
+2. Run 10–15 minutes to build heat zones
+3. Open vent valve → syngas bleeds to atmosphere
+4. Attempt ignition at vent pipe outlet
+5. Flame burns stable and blue/clear → gas is ready
+   Flame yellow / weak / unstable   → not ready, wait
+6. Close vent valve → open engine valve → start engine
+```
+
+Flame color and stability was the quality sensor. A clean blue flame indicated sufficient CO and H₂. A lazy yellow flame indicated tar vapor dominance — not ready.
+
+### Modern Equivalent — Sensor Readiness
+
+The sensor suite formalizes the same judgment:
+
+```
+GASIFIER READY — ALL CONDITIONS MUST BE MET:
+
+  Reduction zone temp  > 700°C     Good gas production confirmed
+  CO sensor            > threshold  Fuel gas present
+  H₂ sensor            > threshold  Gas quality confirmed
+  O₂ pre-engine        < 1%         No air contamination
+  Gas pressure         stable        Consistent flow
+  Tar dewpoint temp    safe          No condensate risk
+  Warmup timer         > 10 min      Minimum thermal soak
+
+ALL MET → Green light illuminates → operator switches fuel
+```
+
+### Manual Switch Philosophy
+
+The final switch is always manual — the green light is the modern flame test, the operator remains in command:
+
+```
+Automatic switching risks:
+  Switching on a momentary sensor spike
+  Switching before operator is ready
+  Switching without operator awareness
+
+Manual switch with green light:
+  Operator makes the final decision
+  Same human-in-the-loop logic as the original flame test
+  Simple, reliable, proven concept
+```
+
+### Warmup Phase Display States
+
+| Phase | Time | Light | Display |
+|---|---|---|---|
+| Ignition | 0–3 min | Red | NOT READY |
+| Building | 3–10 min | Amber | WARMING — X min |
+| Ready | 10–15 min | Green | READY — SWITCH WHEN PREPARED |
+| Syngas active | — | Green steady | SYNGAS ACTIVE |
+| Auto reverted | — | Red flash | FAULT — GASOLINE MODE |
+| CO alarm | — | Red solid | CO ALARM — SHUTDOWN |
+
+### Warmup Sequence Logic
+
+```
+PHASE 1 — Ignition (0–3 min)
+  Gasifier lit, all sensors begin logging
+  Vent valve open — purges startup gas to atmosphere
+  Red light — NOT READY
+
+PHASE 2 — Building (3–10 min)
+  Temps rising through all zones
+  Gas quality sensors rising
+  Amber light — WARMING UP
+  Vent valve remains open
+
+PHASE 3 — Ready (10–15 min)
+  All ready conditions met simultaneously
+  Green light — READY
+  Vent valve still open — operator can observe/light vent
+  System waits for manual switch
+
+SWITCH EVENT — manual operator action
+  Operator flips fuel switch
+  Vent valve closes
+  Engine syngas valve opens
+  ECU receives GPIO → switches to syngas VE/IGN tables
+  Injectors cut or reduced
+  Full sensor snapshot logged at switch event
+
+REVERT — manual or automatic
+  Manual: operator flips switch back
+  Auto triggers: EGT > 950°C, CO alarm, flame loss,
+                 pressure drop, RPM hunting > ±200 RPM
+  Engine valve closes, vent opens
+  ECU reverts to gasoline tables, injectors restored
+  Green light extinguished — manual re-engagement required
+```
+
+### Vent Valve Specification
+
+```
+Type:      Solenoid valve, 12V DC
+Fail mode: Normally OPEN — fails safe to venting if power lost
+Material:  316 stainless body, Viton seals
+Size:      Match gas line diameter
+Vent pipe: Routed outside / upward — away from operator
+           Never vent into enclosed space
+```
+
+---
+
+## 12. Engine Breather and Oil Catch Tank
+
+### Why Syngas Demands a Catch Tank
+
+Wood gas combustion byproducts are significantly dirtier than gasoline. Without a catch tank the PCV system recirculates contaminated blow-by directly onto injector tips and intake valves:
+
+```
+Syngas combustion blow-by contains:
+  Incomplete combustion residues  → soot, carbon particles
+  Tar micro-droplets              → sticky hydrocarbon deposits
+  Water vapor                     → condensation in cold oil
+  CO traces                       → dissolved in oil
+  Char particles                  → abrasive contamination
+```
+
+### Why Ethanol Compounds the Problem
+
+```
+Ethanol specific issues:
+  Higher cylinder wash effect     → strips oil film from bores
+  Water absorption                → ethanol attracts moisture
+  Ethanol residue in blow-by      → attacks rubber PCV seals
+  Oil dilution                    → ethanol dissolves into oil
+
+Injector tip fouling:
+  Ethanol + oil mist from PCV
+  → deposits bake onto hot injector tips
+  → flow restriction and spray pattern distortion
+  → rough running, uneven mixture, misfire
+```
+
+On a syngas/flexfuel combined system both mechanisms are active simultaneously — a catch tank is mandatory.
+
+### Two-Stage Catch System
+
+```
+STAGE 1 — Primary catch tank
+  Coarse separation, bulk oil mist and condensate
+  Volume: 750–1000 ml
+  Labyrinth baffle + stainless mesh pack
+  Drain valve at bottom
+
+STAGE 2 — Secondary coalescing filter
+  Fine mist separation
+  Replaceable filter element
+  Last line of defense before intake
+  Directly protects injector tips
+
+OPTIONAL STAGE 3 — Inline filter
+  Small inline filter on PCV return line
+  Very cheap additional insurance
+```
+
+### Catch Tank Specification
+
+```
+Volume:        750–1000 ml (most engine sizes)
+               Oversizing always preferred
+
+Material:      Aluminium — lightweight, heat tolerant
+               Avoid plastic — ethanol attacks many types
+
+Seals/hose:    Viton (FKM) — ethanol and tar resistant
+               Never standard rubber
+
+Fittings:      Brass or stainless
+               Avoid zinc plated — ethanol causes corrosion
+
+Placement:     Between crankcase breather and intake
+               Low as practical for condensate collection
+               Away from heat sources
+               Accessible for inspection and draining
+
+Orientation:   Inlet high, outlet high (clean gas exits top)
+               Drain at absolute bottom
+               Sight glass or level markings preferred
+```
+
+### Baffle Options
+
+| Type | Efficiency | Notes |
+|---|---|---|
+| Simple baffles | Moderate | Basic |
+| Steel wool / mesh pack | Good | Cheap, replaceable |
+| Labyrinth baffle | Very good | No maintenance element |
+| Labyrinth + mesh | Excellent | Recommended |
+| Coalescing filter element | Excellent | Best separation, replaceable |
+
+### Injection Type Consideration
+
+```
+Port injection:    Catch tank alone is sufficient
+                   Injector tips in cooler location
+                   More tolerant of fuel variation
+                   Recommended for syngas/ethanol builds
+
+Direct injection:  More critical — injectors fire directly
+                   into combustion chamber
+                   Carbon buildup severe
+                   Catch tank reduces rate but is not a
+                   complete solution
+                   Periodic walnut blasting required
+```
+
+Port injection is the preferred choice for a dedicated syngas/ethanol dual fuel build.
+
+### PCV System Options
+
+```
+Standard PCV valve   → Sized for gasoline blow-by only
+                       May not pass increased syngas volume
+
+Uprated PCV valve    → Higher flow rating
+
+Deleted PCV (stationary/off-road only)
+                     → Open filtered breather to atmosphere
+                     → Eliminates intake contamination entirely
+                     → Requires regular catch tank emptying
+```
+
+### Catch Tank Monitoring
+
+```
+Float switch in catch tank:
+  Filling faster than normal → increased blow-by
+  → Indicates developing ring wear
+  → Supervisor logs fill rate trend over time
+  → Rising trend = maintenance warning
+
+Correlate with:
+  Crankcase pressure sensor (existing)
+  Oil dilution sensor (existing)
+  Together: early warning of ring wear, bore glazing,
+            head gasket issues
+```
+
+---
+
+## 13. Final Filtration System
+
+### Position in Gasification Chain
+
+The final filter must be the last element before the mixer — after all cooling stages so tar is fully condensed and capturable:
+
+```
+[Gasifier]
+     ↓
+[Primary cyclone]          — coarse char/ash removal
+     ↓
+[Gas cooler]               — tar condenses to droplets
+     ↓
+[Secondary cyclone]        — condensed tar droplets removed
+     ↓
+[FINAL FILTER]             ← stainless / ceramic — last element
+     ↓
+[Mixer / venturi]
+     ↓
+[Engine]
+```
+
+Hot gas carries tar as vapor which passes through any filter. Cooling first is not optional.
+
+### Stainless Steel Mesh Options
+
+#### Woven Wire Mesh (316L Stainless)
+
+| Mesh Grade | Particle Size | Use |
+|---|---|---|
+| 100 mesh | 150µm | Pre-filter stage |
+| 200 mesh | 75µm | General use |
+| 325 mesh | 44µm | Recommended final filter |
+| 500 mesh | 25µm | Fine — needs large area |
+
+316L preferred over 304 — superior resistance to tar acids and condensate.
+
+#### Sintered Stainless Steel (316L) — Preferred
+
+| Grade | Pore Size | Notes |
+|---|---|---|
+| Coarse | 40µm | Pre-filter |
+| Medium | 20µm | Good general use |
+| Fine | 10µm | Recommended final stage |
+| Ultra-fine | 5µm | High restriction — large area needed |
+
+```
+Sintered SS advantages over woven mesh:
+  Consistent pore size — not variable like woven
+  3D depth filtration — not surface only
+  Rigid — holds shape under pressure cycling
+  Cleanable indefinitely — gasoline soak + ultrasound
+  Temperature stable to 600°C+
+  Non-stick surface treatment possible
+```
+
+10µm sintered 316L stainless is the practical optimum for final stage filtration.
+
+### Ceramic Foam Filter — Recommended Final Stage
+
+Originally developed for molten metal filtration — well suited to gasifier final filtration:
+
+```
+Structure:   Open cell reticulated foam
+             Interconnected 3D pore network
+Grades:      10, 20, 30, 40, 50 PPI (pores per inch)
+Recommended: 20–30 PPI — balances filtration and flow
+```
+
+| Material | Max Temp | Tar Resistance | Notes |
+|---|---|---|---|
+| Silicon carbide (SiC) | 1400°C+ | Excellent | Recommended |
+| Alumina (Al₂O₃) | 1600°C+ | Very good | Slightly more brittle |
+| Zirconia (ZrO₂) | 2200°C+ | Excellent | Overkill |
+| Cordierite | 1200°C | Good | Lower cost |
+
+Silicon carbide 20–30 PPI is the recommended ceramic choice — non-reactive with tar compounds, thermally shock resistant, fully cleanable.
+
+### Multi-Stage Final Filter Assembly
+
+```
+GAS FLOW DIRECTION →
+
+┌──────────────────────────────────────────┐
+│  FINAL FILTER HOUSING — 316SS            │
+│                                          │
+│  [Stage 1]      [Stage 2]    [Stage 3]   │
+│  SS 200 mesh → Sintered SS → SiC foam   │
+│  75µm           10–20µm      20–30 PPI  │
+│  Coarse         Medium        Fine       │
+│  Protects       Depth         Final      │
+│  stages 2,3     filtration    polish     │
+│                                          │
+│  Drain at bottom — each stage            │
+│  Differential pressure tap — each stage  │
+└──────────────────────────────────────────┘
+```
+
+### Housing Specification
+
+```
+Material:      316 stainless steel — mandatory
+               Tar acids attack mild steel rapidly
+
+Configuration: Cylindrical, vertical preferred
+               Gas enters top or side (dirty)
+               Gas exits top clean side
+               Drain at bottom per stage
+
+Seals:         Viton (FKM) — tar and solvent resistant
+               Never standard rubber
+
+Access:        Tri-clamp fittings — quick element removal
+               No tools needed, common in food/chemical industry
+               Widely available in stainless
+
+Ports:         Inlet (dirty), outlet (clean)
+               Drain x1–3 (one per stage)
+               Differential pressure taps
+               Thermocouple pre-filter (confirms gas below dewpoint)
+```
+
+### Cleaning Procedures
+
+#### Gasoline Soak
+
+```
+1. Remove element from housing
+2. Submerge in clean gasoline or diesel
+3. Soak 30–60 minutes — tar softens and dissolves
+4. Agitate gently — soft brush if needed
+5. Rinse with fresh gasoline
+6. Hold to light — check flow uniformity
+7. Air dry completely before reinstallation
+8. Dispose of used gasoline correctly — tar contaminated
+```
+
+#### Ultrasonic Cleaning — Most Effective
+
+```
+1. Pre-soak in gasoline 15 minutes
+   (ultrasound works better on softened deposits)
+2. Transfer to ultrasonic bath
+3. Cleaning fluid options:
+     Isopropyl alcohol    — good tar solvent
+     Kerosene             — effective, slower
+     Ultrasonic detergent — commercial options
+4. Run 20–40 minutes at 40–60°C bath temperature
+   (heat significantly improves cleaning)
+5. Rinse with clean solvent
+6. Compressed air blow-through
+7. Inspect and flow test before reinstallation
+
+Frequency: 37–40 kHz
+Reaches into sintered matrix depth
+Cannot damage stainless or ceramic at normal power
+```
+
+#### Ceramic Foam — Special Handling
+
+```
+DO:
+  Warm element before ultrasound
+  Support fully during handling — fragile
+  Inspect for cracks after each cleaning
+  Replace immediately if cracked — bypass risk
+
+NEVER:
+  Thermal burn-off in open flame → thermal shock cracks ceramic
+  High pressure air blast when cold → fracture risk
+  Mechanical scrubbing → surface cell damage
+```
+
+### Filter Monitoring
+
+```
+Differential pressure across final filter assembly:
+
+  Clean filter:          0.2 – 0.5 kPa
+  Normal operation:      0.5 – 1.5 kPa
+  Clean recommended:     2.0 kPa
+  Clean immediately:     3.0 kPa
+  Engine protect limit:  4.0 kPa → auto-revert to gasoline
+
+Supervisor logs ΔP trend continuously:
+  Rate of rise indicates gas quality / tar content
+  Faster clogging = wetter wood or poor gasification
+  Slow clogging with Alnus incana = system working correctly
+```
+
+### Cleaning Intervals
+
+```
+Alnus incana dry feedstock:   Every 40–80 operating hours
+                               (differential pressure is the true indicator)
+
+Wet or resinous wood:         Interval drops dramatically
+                               → Further reason Alnus incana is preferred
+
+Element service life:
+  Sintered stainless:  Indefinite — hundreds of cleaning cycles
+  Ceramic foam SiC:    Many cycles if handled carefully
+                       Replace if cracked
+  Woven SS mesh:       Indefinite unless mechanically damaged
+```
+
+---
+
+## 14. EGT Operating Ranges
 
 | EGT Range | Condition | Action |
 |---|---|---|
@@ -623,13 +1083,19 @@ SUPERVISOR OUTPUTS:
 
 ---
 
-## 12. Notes and Operational Summary
+## 15. Notes and Operational Summary
 
 - Wood gas is a viable engine fuel with effective RON 100–120, making it genuinely turbo-compatible without knock risk at moderate boost pressures
-- Alnus incana (grey alder) is an excellent feedstock choice — low ash reduces agitation frequency and clinker formation, low tar reduces engine fouling risk
+- Alnus incana (grey alder) is an excellent feedstock choice — low ash reduces agitation frequency and clinker formation, low tar reduces engine fouling risk and filter cleaning intervals
 - Gasoline/syngas blending and flexfuel (ethanol blend)/syngas combinations are viable — ethanol's high octane complements wood gas well
 - The system requires active agitation on smooth roads and stationary installations — a timer-controlled 12V chain-driven worm gear motor is the practical solution
 - Two-tier control separates engine-critical decisions (ECU) from system-level safety and gasifier management (supervisor)
 - All timing values require field tuning with wideband O₂ and knock sensor feedback — tables provided are starting points
-- Oil change intervals must be shortened significantly on wood gas operation due to accelerated contamination from combustion byproducts
-- CO from wood gas is odorless and lethal — a dedicated electrochemical CO detector with automatic shutoff is mandatory for any vehicle installation
+- Gasifier warmup is 10–15 minutes — the green light readiness indicator is the modern equivalent of the WW2 vent pipe flame test — same logic, human-in-the-loop, operator makes the final switch decision
+- A vent valve must route startup gas safely to atmosphere during warmup — solenoid valve, normally open, fails safe
+- An oil catch tank is mandatory on syngas and syngas/ethanol combined operation — tar and ethanol blow-by both foul injector tips and contaminate oil rapidly
+- Port injection is preferred over direct injection for syngas/ethanol builds — more tolerant of fuel variation, injector tips in cooler location
+- Final filtration must be the last element before the mixer — three stage assembly: woven SS pre-filter, sintered 316L SS 10µm, silicon carbide ceramic foam 20–30 PPI
+- Filter elements are cleanable with gasoline soak and ultrasonic bath — stainless and ceramic both have indefinite service life if handled correctly
+- Oil change intervals must be shortened significantly on wood gas operation — monitor via oil dilution sensor and catch tank fill rate trend
+- CO from wood gas is odorless and lethal — a dedicated electrochemical CO detector with automatic shutoff valve is mandatory for any vehicle or enclosed installation
