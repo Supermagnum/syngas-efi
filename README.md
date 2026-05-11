@@ -1,6 +1,16 @@
 # Wood Gas / Syngas EFI Dual Fuel System
 ### Complete Design and Engineering Reference
 
+## Disclaimer
+
+This repository and its documentation are provided **for informational purposes only**. The **author assumes no responsibility or liability** for **underperforming systems**, **fire or other property damage**, **engine or equipment damage**, **personal injury**, or **any other loss** arising from the use, misuse, or reliance on this material.
+
+**Use is entirely at your own risk.** You are **solely responsible** for safe **design**, **construction**, **testing**, **operation**, and **maintenance**, and for obtaining **qualified professional advice** where appropriate. **Biomass gasification, producer gas, and dual-fuel engine work involve intrinsic hazards** (toxic and flammable gases, high temperatures, moving machinery, and pressure systems).
+
+**Applicable laws, regulations, emissions rules, registration requirements, and workplace or environmental obligations** vary by jurisdiction. **You must verify and comply with all local and national requirements** and **consult the relevant authorities** before building, modifying, or operating any system described or inspired here.
+
+---
+
 ## Table of contents
 
 Anchors `sec-theory`, `sec-theory-vehicle`, and `sec-01` … `sec-18` are explicit HTML IDs placed immediately before those chapter headings so intra-document links stay reliable in GitHub rendering.
