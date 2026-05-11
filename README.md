@@ -9,35 +9,6 @@ This repository and its documentation are provided **for informational purposes 
 
 **Applicable laws, regulations, emissions rules, registration requirements, and workplace or environmental obligations** vary by jurisdiction. **You must verify and comply with all local and national requirements** and **consult the relevant authorities** before building, modifying, or operating any system described or inspired here.
 
-<a id="sec-community-forums"></a>
-## Community forums and recent examples
-
-It is **strongly advisable** to **post your plans** and **ask for advice** on **active forums** where **experienced builders** can comment on **sizing**, **safety**, **controls**, and **filtering**. This README is **not** a substitute for **peer review** of a concrete design.
-
-**Primary English-language hub**
-
-- [Drive On Wood — forum](https://forum.driveonwood.com/) — vehicle **gasoline / wood gas** projects, operating experience, and troubleshooting.  
-- [Drive On Wood — main site and library](https://www.driveonwood.com/) — articles, historic **GENGAS** material, and links from **[§18](#sec-18)**.
-
-**Megasquirt EFI tuning**
-
-- [Megasquirt forum — introduction / how to post](https://www.msextra.com/forum-info/) — MS1/MS2/MS3 support areas, **MSQ** and **datalog** attachments.  
-- [Megasquirt support forums](https://www.msextra.com/forums) — primary user support (dual-fuel and gaseous-fuel threads vary by section; read the sticky guidance first).
-
-**Other communities** (search for **current** traffic; treat **old** mailing-list archives as **historical** context only.)
-
-**Recent public write-ups and threads (about the last five years)** — **illustrative only**, not vetted by this repository; **gasoline** engines and **producer gas** appear in different ways (**dual-fuel** vs **wood-only** after warm-up); read each source in full.
-
-| Approx. date | Description | Link |
-|---|---|---|
-| 2026-04 | Syndicated **press** piece on a **Chevrolet** small-block truck running **long distances** on **wood gas** (claims and mileage in the article; trace to primary video/channel if needed). | [Yahoo Autos / syndicated story](https://autos.yahoo.com/classic-and-collector/articles/1972-chevy-truck-traveled-over-170034061.html) |
-| 2024-12 | Forum: **Converting engines**, possibly to **wood gas** — planning and community input. | [Drive On Wood topic](https://forum.driveonwood.com/t/converting-engines-maybe-to-wood-gas/8064) |
-| 2023-10 | Forum: **International Harvester 392** V8 **truck** gasifier project thread. | [Drive On Wood topic](https://forum.driveonwood.com/t/ih-392-truck-gasifier/7539) |
-| 2022-06 | Forum: **Gasification planning** (includes **MPFI** trucks and highway goals). | [Drive On Wood topic](https://forum.driveonwood.com/t/gasification-planning/6725) |
-| 2022-04 | Forum: **2009 Ford F-150** **4.6 L V8** on **wood gas** — build and operation discussion. | [Drive On Wood topic](https://forum.driveonwood.com/t/2009-f150-4-6l-v8-on-wood-gas/6619) |
-
----
-
 ## Table of contents
 
 Anchors `sec-community-forums`, `sec-theory`, `sec-theory-vehicle`, and `sec-01` … `sec-18` are explicit HTML IDs placed immediately before those chapter headings so intra-document links stay reliable in GitHub rendering.
@@ -69,6 +40,37 @@ Anchors `sec-community-forums`, `sec-theory`, `sec-theory-vehicle`, and `sec-01`
 | [18](#sec-18) | Commercial Systems, DIY Plans and Salvage Materials |
 
 ---
+
+<a id="sec-community-forums"></a>
+## Community forums and recent examples
+
+It is **strongly advisable** to **post your plans** and **ask for advice** on **active forums** where **experienced builders** can comment on **sizing**, **safety**, **controls**, and **filtering**. This README is **not** a substitute for **peer review** of a concrete design.
+
+**Primary English-language hub**
+
+- [Drive On Wood — forum](https://forum.driveonwood.com/) — vehicle **gasoline / wood gas** projects, operating experience, and troubleshooting.  
+- [Drive On Wood — main site and library](https://www.driveonwood.com/) — articles, historic **GENGAS** material, and links from **[§18](#sec-18)**.
+
+**Megasquirt EFI tuning**
+
+- [Megasquirt forum — introduction / how to post](https://www.msextra.com/forum-info/) — MS1/MS2/MS3 support areas, **MSQ** and **datalog** attachments.  
+- [Megasquirt support forums](https://www.msextra.com/forums) — primary user support (dual-fuel and gaseous-fuel threads vary by section; read the sticky guidance first).
+
+**Other communities** (search for **current** traffic; treat **old** mailing-list archives as **historical** context only.)
+
+**Recent public write-ups and threads (about the last five years)** — **illustrative only**, not vetted by this repository; **gasoline** engines and **producer gas** appear in different ways (**dual-fuel** vs **wood-only** after warm-up); read each source in full.
+
+| Approx. date | Description | Link |
+|---|---|---|
+| 2026-04 | Syndicated **press** piece on a **Chevrolet** small-block truck running **long distances** on **wood gas** (claims and mileage in the article; trace to primary video/channel if needed). | [Yahoo Autos / syndicated story](https://autos.yahoo.com/classic-and-collector/articles/1972-chevy-truck-traveled-over-170034061.html) |
+| 2024-12 | Forum: **Converting engines**, possibly to **wood gas** — planning and community input. | [Drive On Wood topic](https://forum.driveonwood.com/t/converting-engines-maybe-to-wood-gas/8064) |
+| 2023-10 | Forum: **International Harvester 392** V8 **truck** gasifier project thread. | [Drive On Wood topic](https://forum.driveonwood.com/t/ih-392-truck-gasifier/7539) |
+| 2022-06 | Forum: **Gasification planning** (includes **MPFI** trucks and highway goals). | [Drive On Wood topic](https://forum.driveonwood.com/t/gasification-planning/6725) |
+| 2022-04 | Forum: **2009 Ford F-150** **4.6 L V8** on **wood gas** — build and operation discussion. | [Drive On Wood topic](https://forum.driveonwood.com/t/2009-f150-4-6l-v8-on-wood-gas/6619) |
+
+---
+
+
 
 <a id="sec-theory"></a>
 ## Theory of operation
