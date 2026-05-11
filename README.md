@@ -776,6 +776,14 @@ SUPERVISOR OUTPUTS:
 <a id="sec-11"></a>
 ## 11. Gasifier Warmup and Fuel Switch Procedure
 
+### Pre-start inspection (filters, separators, and condensate)
+
+Before every **gasifier startup**, treat the **gas train** as critical path equipment:
+
+- **Inspect filters and separators** (cyclones, coalescers, demisters) **on a regular schedule** and when **ΔP** across the train **rises** or **flow** falls for a given setting. **Plugged** media or **blinded** mesh **starves** the engine of gas and can **pull liquid slugs** if pressure swings.
+- **Drain condensate** from **coolers**, **condensers**, **water seals**, and **low-point traps** **before** ignition. **Tar–water and acid condensate** left in sumps can be **entrained** into downstream filters or piping on **first draw**, **fouling** the **final filter** in one shot.
+- Keep **spare filter elements** (or a second **cleaned** cartridge / foam set) **in stock**. **Producer gas** loading varies with **feedstock moisture** and **tar**; **field replacement** is faster than an **unplanned** shutdown.
+
 ### Warmup Time
 
 A gasifier requires 10–15 minutes from cold start to establish stable thermal zones and produce engine-quality gas. During this period gas quality is poor — high in tar vapor, low in CO and H₂ — and must not be directed to the engine.
