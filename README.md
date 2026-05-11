@@ -9,14 +9,42 @@ This repository and its documentation are provided **for informational purposes 
 
 **Applicable laws, regulations, emissions rules, registration requirements, and workplace or environmental obligations** vary by jurisdiction. **You must verify and comply with all local and national requirements** and **consult the relevant authorities** before building, modifying, or operating any system described or inspired here.
 
+<a id="sec-community-forums"></a>
+## Community forums and recent examples
+
+It is **strongly advisable** to **post your plans** and **ask for advice** on **active forums** where **experienced builders** can comment on **sizing**, **safety**, **controls**, and **filtering**. This README is **not** a substitute for **peer review** of a concrete design.
+
+**Primary English-language hub**
+
+- [Drive On Wood — forum](https://forum.driveonwood.com/) — vehicle **gasoline / wood gas** projects, operating experience, and troubleshooting.  
+- [Drive On Wood — main site and library](https://www.driveonwood.com/) — articles, historic **GENGAS** material, and links from **[§18](#sec-18)**.
+
+**Megasquirt EFI tuning**
+
+- [Megasquirt forum — introduction / how to post](https://www.msextra.com/forum-info/) — MS1/MS2/MS3 support areas, **MSQ** and **datalog** attachments.  
+- [Megasquirt support forums](https://www.msextra.com/forums) — primary user support (dual-fuel and gaseous-fuel threads vary by section; read the sticky guidance first).
+
+**Other communities** (search for **current** traffic; treat **old** mailing-list archives as **historical** context only.)
+
+**Recent public write-ups and threads (about the last five years)** — **illustrative only**, not vetted by this repository; **gasoline** engines and **producer gas** appear in different ways (**dual-fuel** vs **wood-only** after warm-up); read each source in full.
+
+| Approx. date | Description | Link |
+|---|---|---|
+| 2026-04 | Syndicated **press** piece on a **Chevrolet** small-block truck running **long distances** on **wood gas** (claims and mileage in the article; trace to primary video/channel if needed). | [Yahoo Autos / syndicated story](https://autos.yahoo.com/classic-and-collector/articles/1972-chevy-truck-traveled-over-170034061.html) |
+| 2024-12 | Forum: **Converting engines**, possibly to **wood gas** — planning and community input. | [Drive On Wood topic](https://forum.driveonwood.com/t/converting-engines-maybe-to-wood-gas/8064) |
+| 2023-10 | Forum: **International Harvester 392** V8 **truck** gasifier project thread. | [Drive On Wood topic](https://forum.driveonwood.com/t/ih-392-truck-gasifier/7539) |
+| 2022-06 | Forum: **Gasification planning** (includes **MPFI** trucks and highway goals). | [Drive On Wood topic](https://forum.driveonwood.com/t/gasification-planning/6725) |
+| 2022-04 | Forum: **2009 Ford F-150** **4.6 L V8** on **wood gas** — build and operation discussion. | [Drive On Wood topic](https://forum.driveonwood.com/t/2009-f150-4-6l-v8-on-wood-gas/6619) |
+
 ---
 
 ## Table of contents
 
-Anchors `sec-theory`, `sec-theory-vehicle`, and `sec-01` … `sec-18` are explicit HTML IDs placed immediately before those chapter headings so intra-document links stay reliable in GitHub rendering.
+Anchors `sec-community-forums`, `sec-theory`, `sec-theory-vehicle`, and `sec-01` … `sec-18` are explicit HTML IDs placed immediately before those chapter headings so intra-document links stay reliable in GitHub rendering.
 
 | Ch. | Section |
 |:---:|:---|
+| [D](#sec-community-forums) | Community forums and recent examples |
 | [T](#sec-theory) | Theory of operation |
 | [Tv](#sec-theory-vehicle) | Theory — vehicle platform, induction, and conversion strategy |
 | [1](#sec-01) | Fuel Properties |
@@ -229,6 +257,13 @@ Ideal feedstock moisture: **below 20%**, critical threshold **25%**. Above 25% m
 
 TunerStudio MS is the tuning and logging software for all platforms.
 
+### Megasquirt documentation, support forum, and propane (LPG)
+
+- **Manual contents (legacy HTML mirror):** [Megasquirt manual — table of contents / `mtabcon.htm`](http://megasquirt.free.fr/sources/MS/manual/mtabcon.htm) — entry point into the classic **Megasquirt** documentation set on this mirror; newer boards may also need vendor-specific wiring and the current **M** or **Extra** manual for your processor.
+- **Official support forum — how to post:** [Megasquirt forum introduction](https://www.msextra.com/forum-info/) — sections for **MS1/MS2/MS3**, **TunerStudio**, attaching **MSQ** and **datalogs**; live forum: **[msextra.com/forums](https://www.msextra.com/forums)**.
+
+**Propane (LPG):** Megasquirt firmware can control **spark-ignition** engines on **propane** (separate **VE / fuel** strategy from gasoline), but you still need **correct gaseous-fuel hardware**: **vapor lockoff**, **regulator / zero governor** as applicable, **mixer or injectors**, and **fault-safe** plumbing consistent with local rules. The same **air–gas mixing** considerations described for **producer gas** in **§4** (mixer before throttle, **MAP**-based load) apply in principle; **tar** and **wood gas** filtration are replaced by **LPG**-appropriate **codes and leak checks**.
+
 ### Why MAP-Based Speed Density
 
 Wood gas composition varies with feedstock and gasifier conditions. A MAF sensor would constantly mis-meter the diluted mixture. MAP + TPS + IAT speed-density fueling is fuel-agnostic by nature:
@@ -294,7 +329,6 @@ These are **downstream of the gasifier**: they meter **producer gas and air** (o
 | Knock sensor | Timing safety, max advance | Closed loop retard |
 | Crankcase pressure | Ring wear / blowby monitoring | 0–10 kPa sensor |
 | Oil dilution sensor | Tar/fuel contamination in oil | Refractive index or conductivity |
-| Barometric pressure | Altitude compensation | Often internal to MAP sensor or key-on only; **Megasquirt:** [MapDaddy](https://diyautotune.com/support/original-mapdaddy-documentation) adds a **live baro** channel for **real-time** correction on **MS2/MS3** |
 | Barometric pressure | Altitude compensation | Often internal to MAP sensor or key-on only; **Megasquirt:** [MapDaddy](https://diyautotune.com/support/original-mapdaddy-documentation) adds a **live baro** channel for **real-time** correction on **MS2/MS3**; use the same **inline filter** practice on any **dedicated baro hose** |
 
 ### MAP and barometric reference line protection
