@@ -1,8 +1,114 @@
 # Wood Gas / Syngas EFI Dual Fuel System
 ### Complete Design and Engineering Reference
 
+## Table of contents
+
+Anchors `sec-theory`, `sec-theory-vehicle`, and `sec-01` … `sec-18` are explicit HTML IDs placed immediately before those chapter headings so intra-document links stay reliable in GitHub rendering.
+
+| Ch. | Section |
+|:---:|:---|
+| [T](#sec-theory) | Theory of operation |
+| [Tv](#sec-theory-vehicle) | Theory — vehicle platform, induction, and conversion strategy |
+| [1](#sec-01) | Fuel Properties |
+| [2](#sec-02) | Octane Rating |
+| [3](#sec-03) | Preferred Feedstock — Alnus incana (Grey Alder) |
+| [4](#sec-04) | EFI System — Megasquirt / Open Source ECU |
+| [4a](#sec-04-gasifiers) | Vehicle producer-gas (syngas) sources (verified links) |
+| [4b](#sec-04-mixers) | Gas mixers and actuators (EFI-oriented, 12 V DC) |
+| [5](#sec-05) | Sensor Suite |
+| [6](#sec-06) | Ignition Timing |
+| [7](#sec-07) | Dual Fuel Map Switching |
+| [8](#sec-08) | Forced Induction |
+| [9](#sec-09) | Gasifier Agitation System |
+| [10](#sec-10) | System Architecture |
+| [11](#sec-11) | Gasifier Warmup and Fuel Switch Procedure |
+| [12](#sec-12) | Engine Breather and Oil Catch Tank |
+| [13](#sec-13) | Final Filtration System |
+| [14](#sec-14) | Alternative Feedstocks — Locally Available Materials |
+| [15](#sec-15) | Fuel Briquette Production — Converted Hydraulic Log Splitter |
+| [16](#sec-16) | EGT Operating Ranges |
+| [17](#sec-17) | Notes and Operational Summary |
+| [18](#sec-18) | Commercial Systems, DIY Plans and Salvage Materials |
+
 ---
 
+<a id="sec-theory"></a>
+## Theory of operation
+
+This section summarizes **how the engine ECU meters fuel in each mode** and **how the gasifier produces clean-enough gas**, so the detailed chapters later fit into one mental model.
+
+### EFI in gasoline and flex-fuel modes
+
+In **gasoline-only** operation the ECU runs like any modern **port-fuel-injected** spark engine. For **speed-density** (the model emphasized in this document), the ECU estimates air mass entering the cylinders from **RPM**, **manifold absolute pressure (MAP)**, **throttle position (TPS)**, **intake air temperature (IAT)**, and often **barometric pressure** (key-on, internal MAP, or a dedicated baro sensor such as **MapDaddy** on Megasquirt). It looks up or calculates a **volumetric efficiency (VE)** or equivalent fuel map, commands **injector pulse width**, and trims using **closed-loop lambda** when a wideband or narrowband **O₂** sensor is enabled. **Ignition timing** comes from a separate map with knock and temperature protections.
+
+**Flex-fuel** adds an **ethanol content** input (flex sensor or inferred ethanol percentage). The ECU scales **fueling**, **cold-start**, **acceleration enrichment**, and sometimes **spark** with ethanol fraction because stoichiometry and latent heat differ between gasoline and ethanol. The **air side** is still inferred from MAP/TPS/IAT (and baro), not from fuel composition alone.
+
+Throughout, **liquid fuel is injected** in the intake port; the **throttle** controls air flow; **MAP** reflects load.
+
+### EFI in producer-gas (syngas / wood gas) mode
+
+**Producer gas** is already a **low heating value, gaseous** mixture drawn from the gasifier train. It is **not** metered with gasoline injectors in the usual way. Typical dual-fuel setups **introduce gas through a mixer / venturi / proportional valve** ahead of the throttle (for example **post-intercooler** on a turbo build; see **Section 8**). **Gasoline injectors** are **turned off** or used only for **pilot**, **cold start**, or **fallback**.
+
+The ECU still uses **MAP, TPS, IAT**, and **RPM** for **speed-density** because the **air path** is the same: the throttle sets **charged air mass**, and the **mixer** sets how much **producer gas** accompanies that air. Separate **VE (or fuel) tables** and **AFR targets** are calibrated for **wood gas mode**. A **wideband** remains essential for tuning and closed-loop trim. **Ignition** maps are usually **advanced** relative to gasoline because flame speed and knock behavior differ.
+
+Because producer gas **composition and humidity** drift with gasifier state, **MAP-based** control is preferred over a **MAF** (mass airflow) calibrated for a fixed gas type. The **supervisor** layer may use extra sensors (CO, H₂, pressures, filter ΔP) for safety and quality; the **ECU** still closes the loop on **lambda** where possible.
+
+Mode switching between **gasoline/flex** and **syngas** is gated by **temperature, quality, and safety** checks (see **Section 7**).
+
+### How the downdraft gasifier works (component roles)
+
+A **fixed-bed downdraft** gasifier for engine fuel processes **solid biomass** in stacked **zones** (see **Section 5** for typical temperature bands):
+
+1. **Drying** — Free and bound moisture is driven off as steam. Moisture wastes heat and lowers gas quality; excessive moisture increases **tar** in the raw gas.
+2. **Pyrolysis** — Heat without enough oxygen breaks biomass into **volatiles** (tars, light hydrocarbons) and **char**. Tars are unavoidable; the job of the design is to **crack** or remove them before the engine.
+3. **Oxidation (combustion)** — A controlled **air or oxygen** supply burns a fraction of the char and volatiles, releasing heat that sustains the process at **high temperature**.
+4. **Reduction** — Hot **CO₂** and **steam** react with **carbon** in the char (**Boudouard** and **water–gas** reactions), producing **CO** and **H₂**, the main **combustible** components. **Nitrogen** from air passes through largely **inert**, diluting the product—expected for air-blown systems.
+
+**Hopper, grate, nozzles, throat, and insulation** define **flow paths**, **temperature profile**, and **residence time**. If the **reduction** zone **cools** or channels, **CO/H₂** drop and **tar** rises. **Agitation** (see **Section 9**) fights bridging, clinker, and channeling so reduction stays active.
+
+### Why cooling and filters are required
+
+Raw **producer gas** carries **fine char**, **ash**, **acid and water aerosols**, and **tar** as **vapor** at temperature. **Tar** that stays vapor passes through coarse stages; when the gas **cools**, tar **condenses** into **droplets** that can be **separated** mechanically.
+
+Filtration and cleaning exist to protect the **engine and mixer**:
+
+- **Solids** (dust, char) **abrasive** to valves, seats, and **turbo** wheels.
+- **Tar** **plugs** small passages, **sticks** valves, and **fouls** spark plugs and rings.
+- **Acids and water** from condensate **corrode** plumbing and raise **maintenance**.
+
+Hence the usual chain (**Section 13**): **coarse separation** while hot, **cooling** to condense tar, **cyclone/coalescer** stages, then a **final fine filter** as the **last** element before the **mixer**, after all intended cooling—so condensate is managed upstream of the engine.
+
+<a id="sec-theory-vehicle"></a>
+### Vehicle platform, induction, and conversion strategy
+
+**Pickup trucks** are a strong match for **gasoline / syngas** conversions: **cargo bed** space for the **gasifier, filters, and coolers**; **payload** margin; relatively straightforward **routing** of gas lines; and **cooling airflow** that is easier to manage than in many tightly packaged car engine bays. Many historical and current **woodgas vehicle** builds use **pickups** or similar **utility chassis** for these reasons.
+
+**Turbocharged** engines are **preferred** when the objective is to **recover power** lost to producer gas’s **low volumetric energy** (see **Section 8** effective octane and boost discussion). **Naturally aspirated** builds remain common and valid, but expect **significantly lower output** on wood gas than on gasoline for the same engine—plan **gearing**, **usable grade load**, and driver expectations accordingly.
+
+**Registration, emissions, fuel handling, and road-use rules** depend on **jurisdiction**. **Check applicable law** and **ask the relevant authorities** (motor vehicle agency, environmental agency, workplace safety where relevant) **before** assuming **on-road** or **commercial** use is permitted.
+
+**Converting a carbureted engine to EFI** then to dual-fuel is **possible**, but **starting from a vehicle that already has port EFI** usually **saves time and effort**: **MAP**, **TPS**, **injectors**, and **return-style fuel plumbing** are already present; you extend with **mode switching**, **gas train**, and **mixer** hardware rather than replacing the whole **air and fuel metering** architecture. **Less plumbing** is typically required than for a **carb → EFI → syngas** sequence.
+
+**Recommended sequence:** bring the vehicle to a **stable, verified baseline on gasoline** (cold start, idle, part-load, WOT, **lambda** on target, no unresolved misfire or knock) **before** commissioning **producer gas**. Diagnose **one fuel at a time**.
+
+**Mechanical baseline:** treat dual-fuel as a **reliability** project. Start with **good** engine health: **fresh oil**, **new filters** (engine oil, air, fuel), **belts**, **coolant hoses**, a sound **water pump**, **alternator**, and **battery**. Latent **vacuum leaks**, compression loss, cooling faults, or weak ignition that are **masked** on gasoline will dominate troubleshooting once syngas is added.
+
+### External references — gasifier theory, design, and gas cleanup
+
+| Document | Link | Notes |
+|---|---|---|
+| FAO — *Wood gas as engine fuel* (Forestry Paper 72, full HTML) | [Contents / start](https://www.fao.org/4/t0512e/t0512e00.htm) | Theory, gasifier types, fuel specs, engine fueling, hazards, cleaning. |
+| FAO — Chapter 2 (small wood and charcoal gasifiers for engines) | [Chapter 2](https://www.fao.org/4/T0512E/T0512e07.htm) | Suited to engine-scale hardware. |
+| FAO — §2.5 (design of downdraught gasifiers) | [§2.5](https://www.fao.org/4/t0512e/T0512e0c.htm) | Downdraft zones and layout in depth. |
+| Reed & Das — *Handbook of Biomass Downdraft Gasifier Engine Systems* (NREL/SP-271-3022) | [NREL Research Hub](https://research-hub.nrel.gov/en/publications/handbook-of-biomass-downdraft-gasifier-engine-systems/) | Practical handbook: design, testing, measurement, cleanup, engine systems. |
+| Same handbook — digitized copy | [UNT Digital Library](https://digital.library.unt.edu/ark:/67531/metadc1061385/) | PDF and viewer options. |
+| Same handbook — OSTI catalog | [OSTI biblio 5206099](https://www.osti.gov/biblio/5206099) | Metadata and document access path. |
+| Drive On Wood — GENGAS / historical collection | [GENGAS library](https://www.driveonwood.com/library/gengas/) | Swedish program documentation and related scans. |
+| GEK Gasifier Wiki | [wiki.gekgasifier.com](http://wiki.gekgasifier.com/) | Community build and theory notes; if **HTTPS** fails in the browser, use this **HTTP** link (TLS hostname issues on some setups). |
+
+---
+
+<a id="sec-01"></a>
 ## 1. Fuel Properties
 
 ### Wood Gas Composition (Typical)
@@ -28,6 +134,7 @@ Wood gas requires roughly equal parts air to gas by volume due to the large iner
 
 ---
 
+<a id="sec-02"></a>
 ## 2. Octane Rating
 
 ### Component Octane Ratings (RON)
@@ -66,6 +173,7 @@ H₂ content is the primary variable — high H₂ output (15–18%) puts effect
 
 ---
 
+<a id="sec-03"></a>
 ## 3. Preferred Feedstock — Alnus incana (Grey Alder)
 
 Grey alder is an excellent gasification feedstock, particularly for engine applications.
@@ -97,6 +205,7 @@ Ideal feedstock moisture: **below 20%**, critical threshold **25%**. Above 25% m
 
 ---
 
+<a id="sec-04"></a>
 ## 4. EFI System — Megasquirt / Open Source ECU
 
 ### Recommended ECU Platforms
@@ -120,8 +229,46 @@ Fuel delivery = f(RPM, MAP, IAT correction, CLT correction)
 
 Separate VE tables are built for each fuel mode. Megasquirt handles this natively.
 
+For **Megasquirt** builds that need **continuous altitude / weather correction** while driving (not only a **key-on** baro snapshot), the **MapDaddy** upgrade from **DIYAutoTune** replaces the board’s MAP sensor footprint with a module that combines a **4 bar MAP** die and a separate **barometric** sensor. **MS2** and **MS3** firmware can use that **real-time barometric** input for live fueling correction. Wiring is board-revision specific (for example **JS5** on V3.x, **X7** on V2.2); follow the vendor [MapDaddy documentation](https://diyautotune.com/support/original-mapdaddy-documentation).
+
+<a id="sec-04-gasifiers"></a>
+### Vehicle producer-gas (syngas) sources — verified links
+
+**Syngas for a vehicle ICE is made in a gasifier** (solid fuel to producer gas). **Air–gas mixers, venturis, and EFI plumbing** are downstream of that; see **Section 8** (charge path and forced induction) for how gas meets the throttle body.
+
+The URLs below were checked with **`curl -L`** and returned **HTTP 200** from this environment. If a host later returns errors, use the **Internet Archive** or the site’s current landing page. **HTTPS** is preferred; one supplier only served a valid certificate on **HTTP** at the time of checking (`offgrid48.com`).
+
+| Resource | Link | Vehicle relevance |
+|---|---|---|
+| Drive On Wood — community | [driveonwood.com](https://www.driveonwood.com/) | Central US hub for **pickup/truck woodgas** builds, forums, and operating experience. |
+| Drive On Wood — plan library | [Free gasifier plans](https://www.driveonwood.com/library/free-gasifier-plans/) | Downloadable documentation for **self-built** vehicle-scale gasifiers. |
+| Thrive Off Grid | [thriveoffgrid.net](https://www.thriveoffgrid.net/) | Commercial **charcoal / wood** gasifier kits often used in **mobile** and pickup-class projects (confirm rating vs your engine). |
+| Thrive Off Grid — CXF series | [CXF Crossfire gasifier](https://www.thriveoffgrid.net/cxfcrossfiregasifier) | Product line page for a common **kit** form factor. |
+| All Power Labs — GEK kits | [Gasifier kits](https://www.allpowerlabs.com/products/gasifier-kits) | Packaged **gas-making** systems; **vehicle installs** appear in public project write-ups—validate packaging and mass for **road** use yourself. |
+| OffGrid48 — DIY kits | [DIY wood gasifier kits](http://www.offgrid48.com/diy-wood-gasifier-kits.html) | **HTTP** link: HTTPS for this host failed certificate verification here; laser-cut kits sized for **small-engine** projects that are often adapted to **vehicle** frames. |
+| FEMA wood gas generator (1989) | [Internet Archive PDF](https://archive.org/download/femasimplifiedwoodgasgeneratormar1989withbiomassenergyfoundation2001/FEMA_Simplified_Wood_Gas_Generator-Mar_1989_With_Biomass_Energy_Foundation_2001_text.pdf) | Historical **emergency / convoy** downdraft design and **carburetion** chapter—documentation, not a vendor; intake layout differs from modern **EFI** routing. |
+
+**Not in this table:** natural-gas/LPG **mixer** vendors, **stationary CHP** gasifiers (see **Commercial Kits and Systems — Suppliers** later in this document), or links that **404**’d or **TLS-failed** here (e.g. some third-party IMPCO PDF mirrors).
+
+<a id="sec-04-mixers"></a>
+### Gas mixers and actuators (EFI-oriented, 12 V DC)
+
+These are **downstream of the gasifier**: they meter **producer gas and air** (or drive a **common throttle / mixture path**) while a **MAP/TPS/IAT** EFI strategy (above) supplies load information. Catalog parts are usually spec’d for **natural gas / propane / biogas**; **tar-safe** plumbing and filtration from Sections **13** and **8** still apply.
+
+**12 V DC:** Prefer order codes or modules explicitly rated **12 V** (or **12–24 V**). Many industrial gas-engine trains use **24 V** only—use a suitable **DC–DC converter** from the vehicle **12 V** bus only after you match **noise, isolation, and fuse** requirements.
+
+| Resource | Link | 12 V DC (verify before buy) | EFI-oriented use |
+|---|---|---|---|
+| GAC ATB integral throttle bodies | [GAC / Governors America product catalog PDF](https://governorshop.com/wp-content/uploads/2021/02/5ced91bfe8b1186d7fe16e60_PMB7040_Catalog.pdf) | **Yes:** ATB T1/T2 families list **12 or 24 V DC**; part numbers with **`-12`** are the 12 V variants. | Electric actuator drives an integrated plate for **air or air/fuel mixture** on **gaseous-fueled** engines; spring return to low-fuel position when de-energized—interface as you would an **electronic throttle** / position demand from the ECU or governor. |
+| GAC AFR200 / FIMS (closed loop) | [Same GAC catalog PDF](https://governorshop.com/wp-content/uploads/2021/02/5ced91bfe8b1186d7fe16e60_PMB7040_Catalog.pdf) (Fuel & Ignition Management section) | **Yes:** AFR200-family description is paired with **12 or 24 V** hardware in the same catalog—confirm on the **specific controller and harness** you order. | **Closed-loop air–fuel** using an exhaust **O₂** probe; complements **wideband λ** or narrowband strategies when converting a **gaseous-fuel train** beside an EFI. |
+| Northern Self Reliance — automated mixture | [Wood gas automated mixture control](https://northernselfreliance.com/biomass/woodgas/wood-gas-automated-mixture-control/) | **Vehicle 12 V bus** typical; hobby **servos** often run at **5–6 V** via a BEC or regulator off that bus. | Documents **λ feedback** driving a **mixture valve**—same control pattern as **ECU trim** on a separate gas valve or PWM valve driver. |
+| HEINZMANN gas mixers | [Gas mixers](https://heinzmann.com/en/products/gas-mixers) | **Confirm** on datasheet: many site **24 V** actuators; **12 V** may be available on some SKUs or via **DC–DC**. | Commercial **venturi / gas train** mixers for **stationary / industrial** gas engines—useful reference architecture for **dual-fuel** intake design. |
+| HEINZMANN electric actuators | [Actuators for gas engines](https://heinzmann.com/en/products/actuators-gas) | **Confirm** supply voltage per **StG** model. | Pair with a **mixer / throttle valve** and ECU or governor output for **position-controlled** gas or mixture control. |
+| Woodward — mixer application PDFs | [Publication 03379](https://www.woodward.com/products/publication-asset/03379/), [Publication 51540](https://www.woodward.com/products/publication-asset/51540/) | N/A (documentation). | Application notes for **air–gas mixer** families on SI gas engines; use to cross-check **EFI MAP sampling** vs mechanical **mixer–throttle** layout. |
+
 ---
 
+<a id="sec-05"></a>
 ## 5. Sensor Suite
 
 ### Primary Engine Sensors
@@ -129,7 +276,7 @@ Separate VE tables are built for each fuel mode. Megasquirt handles this nativel
 | Sensor | Purpose | Notes |
 |---|---|---|
 | TPS | Load input, | Standard |
-| MAP | Speed-density fueling, boost monitoring | 0–300 kPa range for turbo |
+| MAP | Speed-density fueling, boost monitoring | 0–300 kPa range for turbo; protect reference ports (see **MAP and baro reference line protection** below) |
 | IAT | Charge temp correction | Mount post-intercooler |
 | CLT | Cold start lockout for syngas mode | Syngas only above 80°C |
 | Wideband O₂ (λ) | Closed loop AFR, tuning | Innovate LC-2 or AEM 30-0300 |
@@ -137,8 +284,12 @@ Separate VE tables are built for each fuel mode. Megasquirt handles this nativel
 | Knock sensor | Timing safety, max advance | Closed loop retard |
 | Crankcase pressure | Ring wear / blowby monitoring | 0–10 kPa sensor |
 | Oil dilution sensor | Tar/fuel contamination in oil | Refractive index or conductivity |
-| Barometric pressure | Altitude compensation | Often internal to MAP sensor |
-| Ambient humidity | Charge density correction | BME280 combined sensor |
+| Barometric pressure | Altitude compensation | Often internal to MAP sensor or key-on only; **Megasquirt:** [MapDaddy](https://diyautotune.com/support/original-mapdaddy-documentation) adds a **live baro** channel for **real-time** correction on **MS2/MS3** |
+| Barometric pressure | Altitude compensation | Often internal to MAP sensor or key-on only; **Megasquirt:** [MapDaddy](https://diyautotune.com/support/original-mapdaddy-documentation) adds a **live baro** channel for **real-time** correction on **MS2/MS3**; use the same **inline filter** practice on any **dedicated baro hose** |
+
+### MAP and barometric reference line protection
+
+Install **small inline filters** in the **vacuum / boost hoses** that feed the **MAP sensor** and any **separate barometric** reference (for example **MapDaddy** or an external **baro** transducer). **Disposable paper- or fabric-element filters** intended for **low-pressure gasoline EFI** (inline **fuel filters** for small engines or automotive low-pressure lines) are **suitable**: they trap **fine particles** so grit does not reach the sensor’s **restrictor orifice** or internal passages and **clog** them. **Wood gas / syngas** operation increases exposure to **dust, ash, and oil mist** in the intake tract; without a filter, **slow or erratic MAP** readings and **stuck** pressure traces are common failures. Service or replace the element on a fixed interval or when **transient response** degrades; choose a filter size that keeps **pressure lag** acceptable for boost control and tuning.
 
 ### Gasifier System Sensors
 
@@ -192,6 +343,7 @@ If the reduction zone drops below ~650°C, gas quality deteriorates rapidly — 
 
 ---
 
+<a id="sec-06"></a>
 ## 6. Ignition Timing
 
 Wood gas has a slower flame front (~0.5 m/s vs ~0.8 m/s for gasoline) and high octane resistance to detonation. Both factors require significant ignition advance.
@@ -242,6 +394,7 @@ lower energy density of wood gas mixture.
 
 ---
 
+<a id="sec-07"></a>
 ## 7. Dual Fuel Map Switching
 
 ### Fuel Mode Combinations
@@ -318,6 +471,7 @@ end
 
 ---
 
+<a id="sec-08"></a>
 ## 8. Forced Induction
 
 ### Power Recovery Estimates
@@ -331,6 +485,14 @@ Wood gas + 1.2 bar + intercooler:      95%+
 ```
 
 With consistent H₂ output from Alnus incana and proper intercooling, 95%+ power recovery is realistic.
+
+### Why high octane and forced induction recover power
+
+**Octane (knock resistance) does not add chemical energy** to the charge. It **raises the knock limit**, so syngas often allows **more boost, more compression, and/or more ignition advance** than pump gasoline on the same hardware without detonation. That **unlocks** the extra power margin when you add a turbo or supercharger.
+
+**The charger compensates for low volumetric energy.** Producer gas has **much lower heating value per mixture volume** than gasoline; a naturally aspirated cylinderful releases less work per cycle. Increasing **manifold pressure** increases **trapped charge mass** per cycle, which is what pulls output back toward gasoline-like power.
+
+In short: **low energy per volume** calls for **more boosted airflow**; **high effective octane** helps you **use that boost** (and timing) without knock-limited retreat on the engine. This is not automatic: you still need **reliable gas quality**, **intercooling** when boost heats the charge, **correct mixture control**, and appropriate **boost and safety limits**. **Superchargers** also pay **parasitic** shaft work that **turbos** largely avoid (exhaust-driven).
 
 ### Turbocharger vs Supercharger
 
@@ -404,6 +566,7 @@ Safety limits:
 
 ---
 
+<a id="sec-09"></a>
 ## 9. Gasifier Agitation System
 
 ### The Problem
@@ -533,6 +696,7 @@ JAM DETECTION (INA219 current sensor):
 
 ---
 
+<a id="sec-10"></a>
 ## 10. System Architecture
 
 ### Two-Tier Control
@@ -609,6 +773,7 @@ SUPERVISOR OUTPUTS:
 
 ---
 
+<a id="sec-11"></a>
 ## 11. Gasifier Warmup and Fuel Switch Procedure
 
 ### Warmup Time
@@ -726,6 +891,7 @@ Vent pipe: Routed outside / upward — away from operator
 
 ---
 
+<a id="sec-12"></a>
 ## 12. Engine Breather and Oil Catch Tank
 
 ### Why Syngas Demands a Catch Tank
@@ -864,6 +1030,7 @@ Correlate with:
 
 ---
 
+<a id="sec-13"></a>
 ## 13. Final Filtration System
 
 ### Position in Gasification Chain
@@ -1072,6 +1239,7 @@ Element service life:
 
 ---
 
+<a id="sec-14"></a>
 ## 14. Alternative Feedstocks — Locally Available Materials
 
 All feedstocks below are readily available in Norwegian and Scandinavian conditions. Used alone or blended with Alnus incana as the quality anchor.
@@ -1388,6 +1556,7 @@ WOOD PELLETS:
 
 ---
 
+<a id="sec-15"></a>
 ## 15. Fuel Briquette Production — Converted Hydraulic Log Splitter
 
 A standard hydraulic log splitter converted with a compression end plate is a practical and effective briquette press requiring minimal investment.
@@ -1598,6 +1767,7 @@ Wet material:
 
 ---
 
+<a id="sec-16"></a>
 ## 16. EGT Operating Ranges
 
 | EGT Range | Condition | Action |
@@ -1609,6 +1779,7 @@ Wet material:
 
 ---
 
+<a id="sec-17"></a>
 ## 17. Notes and Operational Summary
 
 - Wood gas is a viable engine fuel with effective RON 100–120, making it genuinely turbo-compatible without knock risk at moderate boost pressures
@@ -1635,6 +1806,7 @@ Wet material:
 
 ---
 
+<a id="sec-18"></a>
 ## 18. Commercial Systems, DIY Plans and Salvage Materials
 
 Target: 1.2–4 litre engine displacement. 316 stainless steel minimum grade throughout — tar acids, condensate and thermal cycling destroy mild steel rapidly. DIY builds in stainless are entirely viable using salvaged and surplus materials.
@@ -1646,7 +1818,8 @@ Target: 1.2–4 litre engine displacement. 316 stainless steel minimum grade thr
 **Drive On Wood — Free Plans Library**
 The most important free resource. FEMA stratified downdraft plans, Imbert dimensions, Larry Dobson public domain design, Gary Gilmore charcoal gasifier, and overview schematics. Wayne Keith's vehicle gasifier plans available to premium members — the most proven vehicle design in operation.
 - Free plans: https://www.driveonwood.com/library/free-gasifier-plans/
-- Full library (research papers, FAO documents, GENGAS): https://www.driveonwood.com/library/
+- Full library (research papers, mirrored documents, GENGAS): https://www.driveonwood.com/library/
+- GENGAS / historical program materials: https://www.driveonwood.com/library/gengas/
 
 **FEMA Simplified Wood Gas Generator — Free PDF**
 Original 1989 FEMA emergency gasifier document. Stratified downdraft design. Free download — historical reference and starting point. Note: known tar producer at variable loads — suitable as educational base, upgrade design before engine use.
@@ -1664,15 +1837,21 @@ Most popular paid DIY plan set. 238 pages, sizing charts, critical dimensions, e
 
 **GEK Gasifier Wiki — All Power Labs Open Source (Original)**
 Original open-source GEK design files, CAD drawings and documentation before All Power Labs went proprietary. Still freely available. Good engineering reference for reactor geometry.
-- https://wiki.gekgasifier.com/
+- http://wiki.gekgasifier.com/ (use **HTTP** if **HTTPS** reports a certificate name mismatch)
 
-**FAO — Wood Gas as Engine Fuel (Free PDF)**
-United Nations Food and Agriculture Organisation document. Comprehensive technical overview of wood gasification for engine use. Free download. Essential reading.
-- https://www.driveonwood.com/library/
+**FAO — *Wood gas as engine fuel* (Forestry Paper 72)**
+United Nations Food and Agriculture Organisation. Comprehensive technical overview of wood gasification for engine use — theory, gasifier types, downdraft design, fuels, gas cleaning, applications, safety. **Official full text (HTML):**
+- Contents: https://www.fao.org/4/t0512e/t0512e00.htm
+- Chapter 2 (small gasifiers for engines): https://www.fao.org/4/T0512E/T0512e07.htm
+- §2.5 (downdraught gasifier design): https://www.fao.org/4/t0512e/T0512e0c.htm  
+Mirrors and PDFs may also appear via [Drive On Wood library](https://www.driveonwood.com/library/).
 
-**Handbook of Biomass Downdraft Gasifier Engine Systems — SERI/US DOE (Free PDF)**
-US Department of Energy handbook. Design, testing, operation and manufacture of small-scale gasifiers under 200 kW. Free download via Drive On Wood library and Build-A-Gasifier.
-- https://www.build-a-gasifier.com/gasifier-plans/
+**Handbook of Biomass Downdraft Gasifier Engine Systems — Reed & Das (SERI/NREL, NREL/SP-271-3022)**
+US program handbook: design, testing, operation, and manufacture of small-scale downdraft gasifier systems (about 200 kW class). Gas measurement, cleanup, and engine interfacing. **Authoritative access points:**
+- NREL Research Hub (publication record): https://research-hub.nrel.gov/en/publications/handbook-of-biomass-downdraft-gasifier-engine-systems/
+- UNT Digital Library (digitized PDF): https://digital.library.unt.edu/ark:/67531/metadc1061385/
+- OSTI catalog: https://www.osti.gov/biblio/5206099  
+Mirrors: [Drive On Wood library](https://www.driveonwood.com/library/), [Build-A-Gasifier plans page](https://www.build-a-gasifier.com/gasifier-plans/)
 
 ---
 
