@@ -34,6 +34,7 @@ Anchors `sec-community-forums`, `sec-theory`, `sec-theory-vehicle`, and `sec-01`
 | [12](#sec-12) | Engine Breather and Oil Catch Tank |
 | [13](#sec-13) | Final Filtration System |
 | [14](#sec-14) | Alternative Feedstocks — Locally Available Materials |
+| [14b](#sec-14b) | Regional Feedstock Alternatives — International |
 | [15](#sec-15) | Fuel Briquette Production — Converted Hydraulic Log Splitter |
 | [16](#sec-16) | EGT Operating Ranges |
 | [17](#sec-17) | Notes and Operational Summary |
@@ -1609,6 +1610,152 @@ WOOD PELLETS:
 ```
 
 ---
+
+
+---
+
+<a id="sec-14b"></a>
+## 14b. Regional Feedstock Alternatives — International
+
+The feedstocks in Section 14 reflect Norwegian and Scandinavian conditions. The gasification principles, EFI system, filtration requirements, and golden rules apply universally. What changes by region is which locally abundant waste materials fill the hopper.
+
+The same evaluation criteria apply everywhere:
+
+- Moisture below 15% before use — press then dry
+- No chlorine — no PVC, foil laminates, glossy coatings
+- No synthetic polymers
+- No treated, painted, or preservative-treated materials
+- No MDF, chipboard, or resin-bonded composite wood
+- Test unfamiliar materials with a small open flame — clean burn proceeds, black smoke or acrid smell rejects
+
+---
+
+### North America
+
+| Material | Source | Cost | Compress | Ash | Tar | Max Blend % | Notes |
+|---|---|---|---|---|---|---|---|
+| Corn cobs | Farms — harvest waste | Free | Yes | 1–2% | Low | 100% capable | Excellent feedstock — low ash, consistent size, well documented in NREL literature |
+| Corn stover (stalks and leaves) | Farms | Free | Yes | 4–6% | Low–mod | 30–40% | Very abundant; higher ash than cobs; blend with wood |
+| Wheat straw | Great Plains farms | Free | Yes | 5–8% | Low–mod | 20% | Same silica caution as Norwegian wheat straw |
+| Sorghum stover | Southern/central farms | Free | Yes | 4–7% | Low–mod | 30% | Similar to corn stover |
+| Pecan shells | Southern US — processing plants | Free–low | Yes | 1–3% | Low | 50% | Hard dense shell — excellent energy density, low tar |
+| Walnut shells | California, Pacific NW | Free–low | Yes | 1–2% | Low | 50% | Very hard — high density briquette |
+| Cotton gin trash | Cotton belt | Free | Yes | 8–12% | Mod | 20% | High ash — blend only; widely available in quantity |
+| Hardwood chips (oak, hickory, maple) | Tree services, sawmills | Free–low | Optional | Low | Low | 100% if dried | Excellent — well dried hardwood is benchmark quality |
+| Cardboard / newspaper | Universal | Free | Yes | Low–med | Low | 30% | Same as Section 14 — universally available |
+
+---
+
+### Southeast Asia
+
+| Material | Source | Cost | Compress | Ash | Tar | Max Blend % | Notes |
+|---|---|---|---|---|---|---|---|
+| Rice husks | Rice mills — abundant waste | Free | Yes | 15–20% | Very low | 30% | Very high silica ash — blend only; near-zero tar; among the most studied gasification feedstocks globally |
+| Coconut shells | Coconut processing | Free–low | No — use whole or cracked | 0.5–1% | Very low | 100% capable | Outstanding feedstock — dense, low ash, very low tar, high fixed carbon |
+| Coconut husks / coir | Coconut processing | Free | Yes | 3–6% | Low–mod | 40% | Bulky — compress well; slightly more tar than shell |
+| Sugarcane bagasse | Sugar mills — large volumes | Free | Yes | 3–5% | Low | 40% | Very abundant; high moisture when fresh — press and dry thoroughly |
+| Bamboo chips | Plantations, construction waste | Free–low | Optional | 1–3% | Low–mod | 60% | Fast growing, good energy density; some species higher silica |
+| Palm kernel shells | Palm oil mills | Free–low | No | 1–3% | Low | 100% capable | Excellent — dense, low ash, low tar; widely available in Indonesia, Malaysia, Thailand |
+| Cashew nut shells | Processing plants | Low | No | 1–2% | Mod–high | 20% | Contains CNSL (cashew nut shell liquid) — resinous, higher tar; blend only |
+| Jute sticks | Bangladesh, India — processing waste | Free | Yes | 3–5% | Low | 50% | Good woody feedstock; well dried essential |
+
+---
+
+### Sub-Saharan Africa
+
+| Material | Source | Cost | Compress | Ash | Tar | Max Blend % | Notes |
+|---|---|---|---|---|---|---|---|
+| Maize cobs | Farms — harvest waste | Free | Yes | 1–2% | Low | 100% capable | Equivalent to North American corn cobs — excellent feedstock |
+| Groundnut (peanut) shells | Processing operations | Free–low | Yes | 3–5% | Low | 60% | Well studied in African gasification projects — good performance |
+| Sorghum stalks | Farms | Free | Yes | 5–8% | Low–mod | 30% | High ash — blend with lower ash materials |
+| Cotton stalks | Farms | Free | Yes | 6–10% | Low–mod | 25% | Very abundant; high ash, blend only |
+| Coffee husks | Coffee processing regions | Free | Yes | 4–7% | Low–mod | 40% | Ethiopia, Kenya, Uganda — large volumes available at processing stations |
+| Acacia / Prosopis chips | Invasive species management | Free | Optional | Low | Low–mod | 60% | Prosopis (mesquite) is an invasive pest in many regions — gasification is a productive use |
+| Eucalyptus chips | Plantations — widely grown | Free–low | Optional | Low | Low | 80% | Fast growing plantation species; good energy density when dried |
+| Dried cattle dung (biomass) | Farms | Free | Yes | 15–25% | Low | 15% | Traditional fuel — very high ash; blend component only; widely available |
+
+---
+
+### South America
+
+| Material | Source | Cost | Compress | Ash | Tar | Max Blend % | Notes |
+|---|---|---|---|---|---|---|---|
+| Sugarcane bagasse | Sugar mills — enormous volumes | Free | Yes | 3–5% | Low | 40% | Brazil and Argentina produce vast quantities; press and dry thoroughly before use |
+| Coffee husks | Processing operations | Free | Yes | 4–7% | Low–mod | 40% | Colombia, Brazil, Peru — large volumes at processing plants |
+| Eucalyptus chips | Brazil — world's largest plantations | Free–low | Optional | Low | Low | 100% if dried | Fast-growing, consistent quality, widely planted; excellent feedstock |
+| Rice husks | Argentina, Brazil, Uruguay | Free | Yes | 15–20% | Very low | 30% | Same high-silica caution as Southeast Asian rice husks — blend only |
+| Macadamia / Brazil nut shells | Processing plants | Free–low | No | 0.5–1% | Very low | 100% capable | Very dense hard shells — excellent energy density, near-zero tar |
+| Soybean husks | Processing plants | Free | Yes | 4–6% | Low | 30% | Very abundant in Brazil and Argentina; moderate ash, blend with wood |
+| Yerba mate stems | Processing operations | Free | Yes | 3–5% | Low–mod | 30% | Argentina, Paraguay — processing waste available in quantity |
+
+---
+
+### Mediterranean and Middle East
+
+| Material | Source | Cost | Compress | Ash | Tar | Max Blend % | Notes |
+|---|---|---|---|---|---|---|---|
+| Olive stones (pits) | Olive oil mills — October–December | Free–low | No — use whole | 2–4% | Very low | 100% capable | Outstanding feedstock — very dense, low moisture, low tar, high fixed carbon. Seasonal but storable |
+| Olive pruning waste | Orchards — winter pruning | Free | Yes | 1–3% | Low | 80% | Chipped prunings from regular orchard management; excellent quality |
+| Almond shells | Processing plants | Free–low | No | 2–3% | Low | 100% capable | Spain, Italy, Turkey, California — dense shell, low tar, excellent energy density |
+| Grape marc / pomace | Wineries — post-harvest | Free | Yes | 5–8% | Mod | 25% | Seeds and skins after pressing; dry thoroughly; seeds improve fixed carbon |
+| Citrus pulp / peel (dried) | Juice processing | Free | Yes | 3–5% | Low–mod | 25% | Must be thoroughly dried — fresh citrus waste is 80%+ moisture |
+| Date palm fronds | Middle East / North Africa | Free | Yes | 4–7% | Low–mod | 30% | Very abundant; chipped or shredded fronds; dry well |
+| Date palm pits | Date processing | Free | Yes | 1–3% | Very low | 80% | Dense hard pit — similar to olive stones; excellent quality |
+| Pistachio shells | Iran, Turkey, Central Asia | Free–low | No | 1–2% | Low | 100% capable | Dense, low ash, very low tar — comparable to almond shells |
+
+---
+
+### Universal Urban Feedstocks
+
+These are available in essentially every country and urban area regardless of climate or agriculture:
+
+| Material | Notes |
+|---|---|
+| Corrugated cardboard | Universal — supermarkets, retail, warehouses produce large clean volumes daily |
+| Newspaper and office paper | Universal — already sorted in waste streams in most countries |
+| Untreated wood pallets | Extremely abundant globally — verify no heat treatment chemical stamps (HT stamped is fine; MB stamped means methyl bromide treatment — reject) |
+| Untreated timber offcuts | Construction sites, carpenter workshops — free and abundant |
+| Paper sacks and kraft bags | Cement, flour, feed sacks — clean kraft paper, widely available |
+| Wood wool / wood shavings (packaging) | Furniture and fragile goods packaging — clean, dry, ready to use |
+
+**Pallet note:** Look for the IPPC stamp on the pallet. **HT** (heat treated) is safe. **MB** (methyl bromide fumigated) must be rejected — toxic gasification byproducts.
+
+---
+
+### Regional Quick Reference — Best Primary Feedstocks
+
+| Region | Best anchor feedstock | Best free bulk material |
+|---|---|---|
+| Scandinavia / Northern Europe | Alnus incana (grey alder) | Cardboard, sawmill waste |
+| North America | Hardwood chips (oak, maple, hickory) | Corn cobs, cardboard |
+| Southeast Asia | Coconut shells / palm kernel shells | Rice husks (blend only — high ash) |
+| Sub-Saharan Africa | Maize cobs | Groundnut shells, eucalyptus chips |
+| South America | Eucalyptus chips | Sugarcane bagasse, coffee husks |
+| Mediterranean / Middle East | Olive stones / almond shells | Olive pruning waste, date palm pits |
+| Universal urban | Untreated hardwood pallets (HT stamped) | Corrugated cardboard, newspaper |
+
+---
+
+### Golden Rules — Universal
+
+Regardless of region or feedstock, these rules apply without exception:
+
+```
+1.  Moisture below 15% before use — press then dry
+2.  No chlorine — no PVC, foil laminates, glossy coated paper
+3.  No synthetic polymers — no polyester, nylon, acrylic
+4.  No treated materials — no painted, preservative-treated wood
+5.  No MDF, chipboard, plywood — resin binders produce toxic gas
+6.  No MB-stamped pallets — methyl bromide residue
+7.  Test unfamiliar materials with small open flame first
+      Clean flame = proceed
+      Black smoke / acrid smell = reject
+8.  High ash feedstocks (rice husks, dung, cotton) — blend only
+9.  Monitor filter ΔP rate of rise — fastest indicator of
+    feedstock quality impact on the system
+10. When in doubt, blend with a known good anchor feedstock
+    rather than running unknown material alone
+```
 
 <a id="sec-15"></a>
 ## 15. Fuel Briquette Production — Converted Hydraulic Log Splitter
