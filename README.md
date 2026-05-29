@@ -20,7 +20,7 @@ Anchors `sec-community-forums`, `sec-theory`, `sec-theory-vehicle`, and `sec-01`
 | [Tv](#sec-theory-vehicle) | Theory — vehicle platform, induction, and conversion strategy |
 | [1](#sec-01) | Fuel Properties |
 | [2](#sec-02) | Octane Rating |
-| [3](#sec-03) | Preferred Feedstock — Alnus incana (Grey Alder) |
+| [3](#sec-03) | Preferred Feedstock — Alnus incana (Grey Alder) — incl. feedstock cube size standard |
 | [4](#sec-04) | EFI System — Megasquirt / Open Source ECU |
 | [4a](#sec-04-gasifiers) | Vehicle producer-gas (syngas) sources (verified links) |
 | [4b](#sec-04-mixers) | Gas mixers and actuators (EFI-oriented, 12 V DC) |
@@ -35,6 +35,7 @@ Anchors `sec-community-forums`, `sec-theory`, `sec-theory-vehicle`, and `sec-01`
 | [13](#sec-13) | Final Filtration System |
 | [14](#sec-14) | Alternative Feedstocks — Locally Available Materials |
 | [14b](#sec-14b) | Regional Feedstock Alternatives — International |
+| [14c](#sec-14c) | Invasive and Weed Species — Free Fuel From Problem Plants |
 | [15](#sec-15) | Fuel Briquette Production — Converted Hydraulic Log Splitter |
 | [16](#sec-16) | EGT Operating Ranges |
 | [17](#sec-17) | Notes and Operational Summary |
@@ -243,6 +244,63 @@ Grey alder is an excellent gasification feedstock, particularly for engine appli
 Low ash content reduces clinker formation and agitation frequency. Low tar content is the most important engine protection factor — tar condenses in pipes, filters, and intake systems and is the primary cause of gasifier engine failures.
 
 Ideal feedstock moisture: **below 20%**, critical threshold **25%**. Above 25% moisture, tar increases dramatically and CO/H₂ output drops.
+
+### Feedstock Cube Size — 100 × 100 mm Standard
+
+Grey alder is cut and split to **100 × 100 mm cubes** (approximately 4 × 4 inches) as the standard feedstock form for the engine displacement range this document targets. This size is not arbitrary — it is determined by four interacting requirements of the downdraft gasifier.
+
+**1 — Throat geometry and bridging**
+
+The cube size must be matched to the gasifier throat diameter. Pieces that are too large bridge above the throat, blocking gas flow. The 100 mm cube suits the throat dimensions appropriate for 1.2–4 litre engine gasifiers. Smaller pieces increase bed packing density, raise pressure drop across the reduction zone, and promote channelling — preferential gas paths that bypass the reduction zone and allow tar to reach the engine uncracked.
+
+**2 — Reduction zone residence time**
+
+A 100 mm cube takes long enough to gasify completely that the reduction zone has adequate time to perform the Boudouard and water-gas reactions — converting CO₂ and steam to CO and H₂, and cracking tar vapour. Pieces significantly smaller than 80 mm fall through the reduction zone too quickly, lowering gas quality and increasing tar output.
+
+**3 — Hopper flow**
+
+Uniform cube geometry feeds predictably under gravity. Irregular shapes, mixed sizes, and pieces with large flat faces cause hopper bridging — a suspended arch that blocks material flow without any visible warning. Consistent 100 mm cubes eliminate this failure mode. The log splitter forming box (Section 15) produces this geometry directly from loose material.
+
+**4 — Moisture uniformity**
+
+A 100 mm cube dried to below 15% surface moisture has a core moisture close enough to the surface moisture that performance is consistent. Larger pieces — 150 mm and above — can have a dry exterior masking a wet core. That hidden moisture enters the gasifier as steam, consumes heat in the drying zone, and increases tar yield unpredictably. The 100 mm size is the practical upper limit for reliable through-drying in open air storage.
+
+### Size Tolerance and Acceptable Variation
+
+```
+Target:          100 × 100 mm (4 × 4 inch) cross-section
+                 Length: 80–150 mm acceptable
+
+Minimum:         No dimension below 60 mm
+                 Fines and small pieces increase bed resistance
+                 and can be carried into the gas stream
+
+Maximum:         No dimension above 150 mm
+                 Bridging and incomplete gasification risk
+                 above this size
+
+Irregular pieces: Acceptable if they fit within the
+                  60–150 mm envelope
+                  Avoid large flat slabs — bridging risk
+
+Mixed sizes:     Acceptable within the 60–150 mm window
+                 Consistent sizing always preferred
+```
+
+### Applying the 100 mm Standard to Other Feedstocks
+
+The 100 mm cube standard applies to all solid feedstocks fed directly to the hopper. Briquetted materials from the log splitter press (Section 15) should target the same 100 × 100 mm cross-section using the forming box dimensions specified there.
+
+| Feedstock | Preparation to 100 mm standard |
+|---|---|
+| Grey alder logs | Split and cut to 100 × 100 mm cubes — chainsaw cross-cut, then log splitter or axe |
+| Hardwood logs (oak, hickory, black locust) | Same — split to 100 mm cross-section, cut to length |
+| Wood pellets | Already small — no sizing needed; feed directly |
+| Briquettes (newspaper, cardboard, straw) | Target 100 × 100 mm forming box — see Section 15 |
+| Wood chips | Acceptable if chips are 40–100 mm — screen out fines below 20 mm |
+| Corn cobs | Natural size typically 80–150 mm — feed whole or halved |
+| Coconut shells | Halved or quartered to 80–120 mm pieces |
+| Charcoal | Lump charcoal 40–80 mm preferred — screen out dust and fines |
 
 ---
 
@@ -1756,6 +1814,144 @@ Regardless of region or feedstock, these rules apply without exception:
 10. When in doubt, blend with a known good anchor feedstock
     rather than running unknown material alone
 ```
+
+
+---
+
+<a id="sec-14c"></a>
+## 14c. Invasive and Weed Species — Free Fuel From Problem Plants
+
+Many of the best gasification feedstocks are plants that landowners, municipalities, and conservation bodies actively want removed. Using them as fuel turns a disposal problem into a fuel supply. In many cases the material is free for collection, and the landowner may welcome the help.
+
+The same filtration and monitoring discipline applies — some invasive species have higher resin or extractive content than domesticated feedstocks, so filter differential pressure monitoring is the key indicator.
+
+---
+
+### The Weed-as-Fuel Principle
+
+```
+Problem plant = free biomass + grateful landowner + no fuel cost
+
+The removal effort is already being paid for by someone.
+Gasification turns that cost into a benefit.
+
+Practical approach:
+  Contact local councils, conservation trusts, farmers,
+  road maintenance crews, and forestry operations.
+  Offer to collect cleared material before it is burned
+  or chipped to waste.
+  Most will say yes immediately.
+```
+
+---
+
+### Confirmed Gasification Feedstocks — Invasive Woody Species
+
+| Species | Invasive Range | Ash | Tar | Notes |
+|---|---|---|---|---|
+| **Black locust** (*Robinia pseudoacacia*) | Eastern US / Appalachia, Central Europe | **0.37–0.76%** | Very low | Outstanding feedstock — documented downdraft gasification, 4,505 cal/g calorific value, higher density than poplar or willow (602 kg/m³). Fixes nitrogen so grows aggressively on disturbed land. **Primary anchor species for eastern US builds.** |
+| **Mesquite** (*Prosopis glandulosa*) | Texas, Oklahoma, SW US, Africa | 1–2% | Low–mod | Studied at Texas A&M — HHV 8,653 BTU/lb, very low moisture naturally (often 6%), energy equivalent to medium-grade subbituminous coal. 22 million acres affected in Texas alone. Use downdraft gasifier — updraft produces high tar. |
+| **Redberry juniper** (*Juniperus pinchotii*) | Texas, Oklahoma, Great Plains | 1–2% | Low–mod | HHV 8,849 BTU/lb — slightly higher than mesquite. Same downdraft caution applies. 20 dry tons/acre standing biomass possible. Resinous — monitor filter ΔP. |
+| **Eastern redcedar** (*Juniperus virginiana*) | Eastern US — expanding rapidly | 1–3% | Mod | Very resinous — higher tar than most hardwoods. Use as blend component max 25%. Dry thoroughly. Landowners actively seek removal across the Great Plains. |
+| **Prosopis** spp. (various) | Sub-Saharan Africa, South Asia, South America | 1–2% | Low | Same genus as North American mesquite — excellent fuel properties. Invasive pest across vast areas of Africa, India, and South America. Landowners and governments pay for removal. |
+| **Tree of heaven** (*Ailanthus altissima*) | Eastern US, Europe, widespread | 1–2% | Low–mod | Fast-growing, aggressive invasive — grows on roadsides, waste ground, even building cracks. Reasonable wood density, moderate energy content. Blend at 40–50% with better quality material. |
+| **Autumn olive / Russian olive** (*Elaeagnus* spp.) | Eastern and Central US | 1–3% | Low | Nitrogen-fixing shrub — dense growth on disturbed land. Reasonable fuel properties. Cut and chip — regrows rapidly so sustainable harvest possible. |
+
+---
+
+### Invasive Herbaceous and Semi-Woody Species
+
+These species have hollow or pithy stems and require briquetting before use. They are not suitable fed loose into a hopper.
+
+| Species | Range | Ash | Tar | Notes |
+|---|---|---|---|---|
+| **Japanese knotweed** (*Fallopia japonica*) | Europe, North America, widespread | 3–5% | Low–mod | Hollow bamboo-like stems — **must be chipped or shredded and briquetted**. Calorific value 16–17 MJ/kg — viable. Stalks contain polyphenols (resveratrol) — no gasification hazard, but adds slightly to extractive content. Grows 3 metres in one season; stands produce 2–3 kg/m² dry biomass annually. In the UK, knotweed arisings are classified as controlled waste — **verify local regulations before moving material**. Blend at 30–40% with woody material. |
+| **Giant knotweed** (*Fallopia sachalinensis*) | Europe, North America | 3–5% | Low–mod | Same as Japanese knotweed — larger stems, similar properties. Often hybridises (*Bohemian knotweed* — *Fallopia × bohemica*). Same handling approach. |
+| **Giant hogweed** (*Heracleum mantegazzianum*) | Europe, North America | 4–6% | Low | Hollow stems — briquette only. Calorific value 16–17 MJ/kg. **WARNING: fresh plant sap causes severe phototoxic burns — wear full protective clothing, gloves, and eye protection when handling. Dry material is safe.** Dried and briquetted stems are acceptable blend material at 20–25%. |
+| **Sosnowsky's hogweed** (*Heracleum sosnowskyi*) | Eastern Europe, Scandinavia | 4–6% | Low | Same family as giant hogweed — same phototoxic sap warning applies. Dried briquettes acceptable. Planted as a livestock crop in the Soviet era; now a major invasive problem across Scandinavia and Eastern Europe. |
+| **Kudzu** (*Pueraria montana*) | South-eastern US — spreading north | 4–7% | Low–mod | Covers millions of acres in the US south. Woody vine — growing season biomass is very high moisture; harvest in autumn when lignified. Dry thoroughly. Blend at 25–30%. Can smother and kill mature trees — landowners very keen for removal. |
+| **Common reed** (*Phragmites australis*) | Europe, North America, widespread | 4–6% | Low | Annual harvest possible — wetland management operations produce large volumes. Dry well. Blend at 30–40%. Calorific value 16–17 MJ/kg. Already used in pellet production in Eastern Europe. |
+
+---
+
+### Scandinavian and Northern European Invasive Species
+
+Relevant specifically for Norwegian and Scandinavian builds:
+
+| Species | Notes |
+|---|---|
+| **Sosnowsky's hogweed** | As above — a serious problem across Norway and Scandinavia. Municipalities pay for removal. Dried briquettes viable at 20–25% blend. Wear full PPE when handling fresh material. |
+| **Giant hogweed** (*Heracleum mantegazzianum*) | As above — widespread in Norway. Same PPE requirement fresh. |
+| **Lupine** (*Lupinus polyphyllus*) | Dense stands on roadsides and disturbed ground across Norway. Annual herbaceous material — high moisture when fresh. Dry and briquette. Blend at 20% maximum. |
+| **Japanese knotweed** | Present and spreading in Norway — same handling rules as above. Check local regulations. |
+| **Himalayan balsam** (*Impatiens glandulifera*) | Spreading in southern Norway — annual, very high moisture. Dry before use. Low lignin — blend with woodier material at 15–20%. |
+| **Sitka spruce** (*Picea sitchensis*) self-seeded escapes | Planted widely in Norway; spreading from plantations into native heathland. Young trees and brush cleared by conservation operations — resinous, higher tar than hardwoods. Use at 20–30% blend maximum, monitor filter ΔP closely. |
+
+---
+
+### Important Notes for Invasive Species Handling
+
+```
+REGULATIONS:
+  Some invasive species are subject to legal restrictions
+  on movement and disposal. Japanese knotweed in the UK
+  is the most notable example — arisings are controlled
+  waste and cannot be moved without compliance.
+  Verify local regulations before collecting or transporting
+  any invasive plant material.
+
+PPE FOR HOGWEED SPECIES:
+  Giant hogweed and Sosnowsky's hogweed sap causes
+  severe phototoxic burns — blistering in sunlight.
+  Wear: waterproof gloves, long sleeves, eye protection.
+  Dry material after thorough drying is safe to handle normally.
+  Never burn fresh hogweed — smoke can cause eye and lung injury.
+
+RHIZOME MANAGEMENT (knotweed):
+  Knotweed rhizomes can regenerate from small fragments.
+  Gasification destroys the plant completely — one of the
+  few truly permanent disposal methods.
+  This is a genuine environmental benefit of the application.
+
+RESINOUS SPECIES (juniper, cedar, sitka):
+  Monitor filter ΔP more frequently than with clean hardwood.
+  Blend at stated maximum percentages.
+  Charcoal-only runs every 40–50 hours clean the system.
+```
+
+---
+
+### Why Weed Species Are Often Excellent Feedstocks
+
+Invasive plants share several characteristics that make them useful gasification feedstocks:
+
+```
+Fast growth      → High annual biomass yield per area
+Disturbed land   → Grows where nothing useful would grow anyway
+No cultivation   → Zero agricultural input cost
+Landowner wants  → Collection is welcomed, not charged for
+  removal
+Dense stands     → High collection efficiency per hour
+Dry naturally    → Many species growing on free-draining disturbed
+                   ground have lower initial moisture than
+                   plantation crops
+```
+
+The parallel with grey alder in Norway is exact — a species that is aggressive, unwanted, and free is precisely the right anchor feedstock for a zero-cost fuel system.
+
+---
+
+### Invasive Species — Regional Quick Reference
+
+| Region | Best invasive feedstock | Caution |
+|---|---|---|
+| Eastern US / Appalachia | Black locust | None — excellent feedstock |
+| Texas / Great Plains | Mesquite, redberry juniper | Use downdraft gasifier; monitor tar |
+| South-eastern US | Kudzu | High moisture — dry thoroughly |
+| Europe / North America widespread | Japanese / giant knotweed | Check local disposal regulations |
+| Norway / Scandinavia | Sosnowsky's hogweed, lupine | PPE required fresh; dry before use |
+| Global tropical | Prosopis spp. (mesquite relatives) | Excellent properties; widely available |
+| Eastern US roadsides | Tree of heaven (*Ailanthus*) | Blend at 40–50% |
 
 <a id="sec-15"></a>
 ## 15. Fuel Briquette Production — Converted Hydraulic Log Splitter
